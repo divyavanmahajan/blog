@@ -1,0 +1,117 @@
+---
+interface Props {
+    headings: { depth: number; slug: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+
+// Filter to only show h2 and h3 headings
+const tocHeadings = headings.filter((h) => h.depth <= 3);
+---
+
+{
+    tocHeadings.length > 0 && (
+        <div class="toc">
+            <div class="toc__title">Page Content</div>
+            <nav class="toc__menu">
+                <ul>
+                    {tocHeadings.map((heading) => (
+                        <li class={`toc-level-${heading.depth}`}>
+                            <a href={`#${heading.slug}`}>{heading.text}</a>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        </div>
+    )
+}
+
+<style>
+    .toc {
+        margin: 2rem 0;
+        border: 1px solid #ebebeb;
+    }
+
+    .toc__title {
+        background-color: #2a2a2a;
+        color: #fff;
+        padding: 10px 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        letter-spacing: 0.5px;
+    }
+
+    .toc__menu {
+        background: #fff;
+    }
+
+    .toc__menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .toc__menu li {
+        border-bottom: 1px solid #ebebeb;
+    }
+
+    .toc__menu li:last-child {
+        border-bottom: none;
+    }
+
+    .toc__menu a {
+        display: block;
+        padding: 5px 10px;
+        color: #e22d30;
+        text-decoration: none;
+        font-family:
+            "Open Sans",
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Helvetica,
+            Arial,
+            sans-serif;
+        transition: background-color 0.2s ease;
+    }
+
+    .toc__menu a:hover {
+        background-color: #f8f8f8;
+    }
+
+    /* Indentation for nested headings */
+    .toc-level-2 a {
+        padding-left: 15px;
+    }
+
+    .toc-level-3 a {
+        padding-left: 30px;
+        font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+        .toc {
+            margin: 1.5rem 0;
+        }
+
+        .toc__title {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+        }
+
+        .toc__menu a {
+            padding: 4px 8px;
+            font-size: 0.9rem;
+        }
+
+        .toc-level-2 a {
+            padding-left: 12px;
+        }
+
+        .toc-level-3 a {
+            padding-left: 24px;
+            font-size: 0.85rem;
+        }
+    }
+</style>

@@ -3,8 +3,8 @@ title: "Building This Blog with Antigravity"
 description: "A behind-the-scenes look at how this blog was architected and built."
 pubDate: 2026-01-19
 author: "Divya van Mahajan"
-categories: ["Coding", "Meta"]
-tags: ["antigravity", "astro", "architecture"]
+categories: ["Coding"]
+tags: ["antigravity", "astro", "architecture","genai"]
 draft: false
 ---
 
@@ -63,7 +63,34 @@ The deployment workflow is handled by GitHub Actions, which is configured in the
 
 Currently accessible at [https://divyavanmahajan.github.io/](https://divyavanmahajan.github.io/) and [https://vanmahajan.de](https://vanmahajan.de).
 
-## 5. The Future
+## 5. Accessing the Local Site Externally
+
+During development, you might want to access your local Astro dev server from another device or share it with others. SSH tunneling services like [tuns.sh](https://tuns.sh) make this easy, but Vite (which powers Astro's dev server) blocks requests from unknown host headers by default.
+
+To allow external access through a custom domain, add the domain to Vite's `allowedHosts` configuration in `astro.config.mjs`:
+
+```javascript
+export default defineConfig({
+    site: process.env.SITE || 'https://divyavanmahajan.github.io',
+    base: process.env.BASE || '/',
+    vite: {
+        server: {
+            allowedHosts: ['picodvm-blog.tuns.sh', '.tuns.sh', 'localhost', '127.0.0.1'],
+        },
+    },
+});
+```
+
+Then create an SSH tunnel:
+
+```bash
+ssh -R blog:80:localhost:4321 ash.tuns.sh
+```
+
+This configuration explicitly allows requests with the tunnel's host header, preventing the "Blocked request" error that would otherwise occur.
+
+## 6. The Future
+
 
 I plan to continue using Astro for this blog, and I will keep updating it with new posts and features. I will also continue to use GitHub Actions for deployment, and I will keep using Cloudflare Pages for hosting.
 
