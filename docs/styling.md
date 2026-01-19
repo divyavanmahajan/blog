@@ -4,11 +4,15 @@ This document outlines the design decisions, CSS variables, and layout systems u
 
 ## 1. Typography
 
-We use a high-contrast font pairing from Google Fonts to balance impact and readability.
+We use a three-tier typography system with distinct fonts for the site title, headings, and body text.
 
--   **Headings**: [Open Sans](https://fonts.google.com/specimen/Open+Sans)
+-   **Site Title**: Times New Roman (serif)
+    -   Weight: `500` (Medium)
+    -   Usage: Main site heading (`.site-title`)
+    -   Purpose: Classic, elegant serif for the primary brand element.
+-   **Headings**: [Josefin Sans](https://fonts.google.com/specimen/Josefin+Sans)
     -   Weight: `800` (ExtraBold)
-    -   Usage: `h1` through `h6`
+    -   Usage: `h1` through `h6`, table of contents
     -   Purpose: Strong, geometric headers that stand out.
 -   **Body**: [Inter](https://fonts.google.com/specimen/Inter)
     -   Weight: `400` (Regular)
@@ -18,8 +22,10 @@ We use a high-contrast font pairing from Google Fonts to balance impact and read
 ### CSS configuration
 ```css
 :root {
-    --font-header: 'Open Sans', sans-serif;
+    --font-title: 'Times New Roman', serif;
+    --font-header: 'Josefin Sans', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --weight-title: 500;
     --weight-header: 800;
     --weight-body: 400;
     --tracking-header: -0.02em;

@@ -13,8 +13,10 @@
     --color-border: #e6e6e6;
 
     /* Typography */
+    --font-title: 'Times New Roman', serif;
     --font-header: 'Josefin Sans', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --weight-title: 500;
     --weight-header: 800;
     --weight-body: 400;
     --tracking-header: -0.02em;
