@@ -25,7 +25,7 @@ I chose **[Astro](https://astro.build/)** for its "Zero JS by default" philosoph
 
 ### Core Stack
 - **Framework**: Astro v4
-- **Styling**: Vanilla CSS with scoped components.
+- **Styling**: Vanilla CSS with scoped components. Also see [Styling Doc](https://github.com/divyavanmahajan/astro-blog/blob/main/docs/styling.md).
 - **Content**: Type-safe Markdown using Astro Content Collections.
 
 As detailed in our [Architecture Doc](https://github.com/divyavanmahajan/astro-blog/blob/main/docs/architecture.md), the project structure is organized to keep content separate from logic:
@@ -35,7 +35,8 @@ src/
 ├── components/     # UI building blocks (Header, Sidebar)
 ├── content/        # Markdown posts live here
 ├── layouts/        # Page wrappers
-└── pages/          # File-based routing
+├── pages/          # File-based routing
+└── styles/         # Global styles
 ```
 
 ### Deployment
