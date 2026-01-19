@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const allPosts = await getCollection('blog');
+	const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+
+	return uniqueTags.map((tag) => {
+		const filteredPosts = allPosts.filter((post) => post.data.tags.includes(tag));
+		return {
+			params: { tag: tag.toLowerCase() },
+			props: { posts: filteredPosts, tag },
+		};
+	});
+}
+
+const { tag, posts } = Astro.props;
+const { BASE_URL } = import.meta.env;
+---
+
+<BaseLayout title={`Tag: ${tag} | Astro Blog`}>
+    <header class="page-header">
+        <h1>Tag: <span>{tag}</span></h1>
+    </header>
+
+	<section class="post-list">
+        {posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).map((post) => (
+            <article class="post-entry">
+                <header class="entry-header">
+                    <h2 class="entry-title">
+                        <a href={`${BASE_URL}posts/${post.slug}/`}>{post.data.title}</a>
+                    </h2>
+                    <div class="entry-meta">
+                        <span class="posted-on">
+                            <time datetime={post.data.pubDate.toISOString()}>
+                                {post.data.pubDate.toLocaleDateString('en-us', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                })}
+                            </time>
+                        </span>
+                         &bull; 
+                        <span class="byline"> {post.data.author || 'Author'}</span>
+                    </div>
+                </header>
+                
+                <div class="entry-content">
+                    <p>{post.data.description}</p>
+                </div>
+                
+                <footer class="entry-footer">
+                    <a href={`${BASE_URL}posts/${post.slug}/`} class="read-more">Read more...</a>
+                </footer>
+            </article>
+        ))}
+    </section>
+</BaseLayout>
+
+<style>
+     .page-header {
+        margin-bottom: 2rem;
+        background: #fff;
+        padding: 1rem 2rem;
+        border: 1px solid var(--color-border);
+    }
+    .page-header span {
+        color: var(--color-primary);
+        text-transform: capitalize;
+    }
+
+    .post-entry {
+        margin-bottom: 2rem;
+        background: #fff;
+        padding: 2rem;
+        border: 1px solid var(--color-border);
+    }
+
+    .entry-title {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .entry-title a {
+        color: var(--color-text);
+        text-decoration: none;
+    }
+
+    .entry-title a:hover {
+        color: var(--color-primary);
+    }
+
+    .entry-meta {
+        color: var(--color-text-light);
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+
+    .entry-footer {
+        margin-top: 1.5rem;
+    }
+
+    .read-more {
+        background: var(--color-primary);
+        color: #fff;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        border-radius: 2px;
+        font-size: 0.9rem;
+    }
+
+    .read-more:hover {
+        background: #cc292b;
+        text-decoration: none;
+    }
+</style>
