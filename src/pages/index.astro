@@ -7,7 +7,7 @@ const posts = (await getCollection('blog'))
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="Home | Astro Blog">
+<BaseLayout title="Home | Divya van Mahajan - Things I've learned">
 	<section class="post-list">
         {posts.map((post) => (
             <article class="post-entry">

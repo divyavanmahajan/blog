@@ -45,7 +45,7 @@ This project is a static site generated using **[Astro](https://astro.build/)**.
 The site is designed for **Multi-Target Deployment**.
 
 ### A. GitHub Pages (Primary)
--   **Configuration**: `astro.config.mjs` sets `base: '/astro-blog'` to support subdirectory serving.
+-   **Configuration**: `astro.config.mjs` sets `base: '/blog'` to support subdirectory serving.
 -   **Workflow**: `.github/workflows/deploy.yml`
     1.  **Trigger**: Push to `main`.
     2.  **Build**: separate job runs `npm run build` on Ubuntu.

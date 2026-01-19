@@ -1,7 +1,7 @@
 # Astro Blog User Manual
 
 This guide explains how to manage content on your Astro blog, hosted at:
-**[https://divyavanmahajan.github.io/astro-blog/](https://divyavanmahajan.github.io/astro-blog/)**
+**[https://divyavanmahajan.github.io/blog/](https://divyavanmahajan.github.io/blog/)**
 
 ---
 
@@ -32,7 +32,7 @@ draft: false               # Set to true to hide from the live site
 
 ### Content Tips
 -   **Code Blocks**: Use triple backticks (\`\`\`) to create syntax-highlighted code blocks.
--   **Internal Links**: Use standard markdown links `[Title](/astro-blog/path/to/page)`.
+-   **Internal Links**: Use standard markdown links `[Title](/blog/path/to/page)`.
 
 ---
 
@@ -43,22 +43,20 @@ To include images, PDFs, or other downloadable files in your posts, follow these
 ### 1. Store the File
 Place your file in the **`public/`** directory. You can organize them into subfolders (e.g., `public/images/`, `public/docs/`).
 
-**Example**: Save an image to `public/images/my-photo.jpg`.
+-   **Images**: Place images in `public/images/` and reference them like `/blog/images/filename.jpg` (Must include the `/blog` prefix).
 
-### 2. Reference the File in Markdown
-When linking to the file, you **MUST** include the `/astro-blog/` prefix because the site is hosted at a subdirectory on GitHub Pages.
 
 **Image Syntax**:
 ```markdown
-![Description of image](/astro-blog/images/my-photo.jpg)
+![Description of image](/blog/images/my-photo.jpg)
 ```
 
 **File Download Link**:
 ```markdown
-[Download PDF](/astro-blog/docs/my-document.pdf)
+[Download PDF](/blog/docs/my-document.pdf)
 ```
 
-> **Important**: Do not start paths with `../` or `src/`. Always use the absolute path starting with `/astro-blog/` which maps to your `public/` folder.
+> **Important**: Do not start paths with `../` or `src/`. Always use the absolute path starting with `/blog/` which maps to your `public/` folder.
 
 ---
 
@@ -91,7 +89,7 @@ If your changes aren't showing up, check the following:
 -   **Frontmatter Errors**: If the build fails, check your `.md` file. Ensure `pubDate` is a valid date and `title` is present.
 -   **Broken Links**: Ensure internal links use the correct base path. 
     -   *Incorrect*: `[Link](/about)`
-    -   *Correct*: `[Link](/astro-blog/about)`
+    -   *Correct*: `[Link](/blog/about)`
 -   **Draft Mode**: If the post is missing locally or remotely, check if `draft: true` is set in the frontmatter.
 
 ### 3. Local Preview
@@ -100,4 +98,4 @@ Open your terminal and run:
 ```bash
 npm run dev
 ```
-Open the localhost link shown (usually `http://localhost:4321/astro-blog/`).
+Open the localhost link shown (usually `http://localhost:4321/blog/`).
