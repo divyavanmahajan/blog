@@ -118,9 +118,12 @@ You can automatically generate LinkedIn-ready articles and posts from your blog 
     -   `article.txt`: Formatted Markdown for LinkedIn's rich text article editor.
     -   `post.txt`: Short post text to announce your article.
 5.  **Publish to LinkedIn**:
-    -   Create a new LinkedIn Article and paste the content from `article.html` or `article.txt`.
-    -   Once published, copy the LinkedIn article URL.
+    -   **Article Body (Recommended)**: Open the generated `article.html` in your web browser, copy the entire page (`Cmd + A`, `Cmd + C`), and paste it (`Cmd + V`) into the LinkedIn "Write article" editor. This preserves all images, links, and formatting.
+    -   **Alternative**: Copy text from `article.txt` and paste it into the editor. You may need to manually re-add images.
+    -   **Thumbnail**: Manually upload your blog post's cover image as the LinkedIn article thumbnail.
+    -   **Short Post**: Use the text from `post.txt` to announce your new article in a standard LinkedIn update.
 6.  **Track the URL**:
+    -   Once published, copy the LinkedIn article URL.
     -   Paste the URL into your post's frontmatter as `linkedinArticleUrl: "https://..."`.
     -   This allows the tool to generate **Update Summaries** if you change the post later.
 
