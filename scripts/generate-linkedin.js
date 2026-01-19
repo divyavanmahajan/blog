@@ -90,6 +90,7 @@ function generateHtmlArticle(frontmatter, markdown) {
     return `<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>${frontmatter.title}</title>
 </head>
 <body>
