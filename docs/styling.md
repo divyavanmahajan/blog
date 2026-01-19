@@ -65,3 +65,8 @@ Specific adaptations are made for smaller screens (< 768px):
     -   `pre` blocks (code snippets) show a scrollbar (`overflow-x: auto`) rather than expanding the container.
 -   **Overflow**:
     -   `body` has `overflow-x: hidden` to prevent accidental horizontal scrollbars.
+-   **Header Adaptations**:
+    -   **Site Title**: Scales down from `2.5rem` to `1.8rem` to fit on narrow screens (e.g., iPhone SE at 375px).
+    -   **Navigation**: Menu items have reduced padding (`0.8rem 1rem`) and slightly smaller font size to fit on a single line.
+    -   **Spacing**: Vertical padding is reduced to save screen real estate.
+

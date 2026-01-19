@@ -12,7 +12,7 @@ Welcome to a meta-post about how I created this blog. I used a structured vibe-c
 
 ## 1. The Specification
 
-Before writing a single line of code, we defined exactly what this blog should be. We wanted a lightweight, easy-to-manage site that prioritizes performance. 
+Before writing a single line of code, I defined exactly what this blog should be. I wanted a lightweight, easy-to-manage site that prioritizes performance. 
 
 Key requirements from our [Spec](https://github.com/divyavanmahajan/astro-blog/blob/main/docs/spec.md):
 - **Workflow**: Direct markdown editing in VS Code. No complex headless CMS.
@@ -69,4 +69,6 @@ I plan to continue using Astro for this blog, and I will keep updating it with n
 
 ## Conclusion
 
-This blog is a testament to the power of modern static site generators combined with thoughtful engineering. By keeping it simple, typed, and automated, we can focus on what matters most: the content.
+Building this blog with Antigravity was an interesting exercise. On one hand Antigravity is rapidly able to create 90% of the code and site, but it struggled trying to correct the CSS styling. If it was a person, I would be scracthing my head, wondering how such a smart programmer struggled with simple problems but did great at complex problems. 
+
+By keeping the blog simple, typed, and automated, I can focus on what matters most: the content.
