@@ -31,8 +31,34 @@ draft: false               # Set to true to hide from the live site
 5.  Write your content below the second `---` using standard Markdown.
 
 ### Content Tips
--   **Images**: Place images in `public/images/` and reference them like `/astro-blog/images/filename.jpg` (Must include the `/astro-blog` prefix).
--   **Code Blocks**: Use triple backticks (\`\`\`) to create code blocks.
+-   **Code Blocks**: Use triple backticks (\`\`\`) to create syntax-highlighted code blocks.
+-   **Internal Links**: Use standard markdown links `[Title](/astro-blog/path/to/page)`.
+
+---
+
+## 2. Adding Static Assets (Images & Files)
+
+To include images, PDFs, or other downloadable files in your posts, follow these steps:
+
+### 1. Store the File
+Place your file in the **`public/`** directory. You can organize them into subfolders (e.g., `public/images/`, `public/docs/`).
+
+**Example**: Save an image to `public/images/my-photo.jpg`.
+
+### 2. Reference the File in Markdown
+When linking to the file, you **MUST** include the `/astro-blog/` prefix because the site is hosted at a subdirectory on GitHub Pages.
+
+**Image Syntax**:
+```markdown
+![Description of image](/astro-blog/images/my-photo.jpg)
+```
+
+**File Download Link**:
+```markdown
+[Download PDF](/astro-blog/docs/my-document.pdf)
+```
+
+> **Important**: Do not start paths with `../` or `src/`. Always use the absolute path starting with `/astro-blog/` which maps to your `public/` folder.
 
 ---
 
