@@ -99,3 +99,33 @@ Open your terminal and run:
 npm run dev
 ```
 Open the localhost link shown (usually `http://localhost:4321/`).
+
+---
+
+## 4. LinkedIn Cross-Posting
+
+You can automatically generate LinkedIn-ready articles and posts from your blog content.
+
+### Step-by-Step
+1.  In your post's **Frontmatter**, add `linkedin: true`.
+2.  (Optional) Add `linkedinMessage: "Your custom post text"` if you want different text for the LinkedIn post than the blog description.
+3.  **Build or Generate**:
+    -   Run `npm run build` (automatic generation after build).
+    -   Or run `npm run linkedin` to just generate the LinkedIn files.
+4.  **Find your content**:
+    -   Navigate to the `linkedin/[post-slug]/` directory.
+    -   `article.html`: Clean HTML for LinkedIn's HTML editor.
+    -   `article.txt`: Formatted Markdown for LinkedIn's rich text article editor.
+    -   `post.txt`: Short post text to announce your article.
+5.  **Publish to LinkedIn**:
+    -   Create a new LinkedIn Article and paste the content from `article.html` or `article.txt`.
+    -   Once published, copy the LinkedIn article URL.
+6.  **Track the URL**:
+    -   Paste the URL into your post's frontmatter as `linkedinArticleUrl: "https://..."`.
+    -   This allows the tool to generate **Update Summaries** if you change the post later.
+
+### Updating Posts
+If you update a blog post that was previously published:
+1.  The tool will automatically regenerate the files.
+2.  Check `update-summary.txt` for a generated "Article Update" announcement.
+3.  Manually update the LinkedIn article with the new content.
