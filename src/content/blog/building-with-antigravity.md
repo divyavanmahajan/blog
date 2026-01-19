@@ -1,13 +1,13 @@
 ---
 title: "Building This Blog with Antigravity"
-description: "A behind-the-scenes look at how this Astro blog was architected and built."
+description: "A behind-the-scenes look at how this blog was architected and built."
 pubDate: 2026-01-19
 categories: ["Coding", "Meta"]
 tags: ["antigravity", "astro", "architecture"]
 draft: false
 ---
 
-Welcome to a meta-post about this very blog! This site wasn't just summoned into existence; it was carefully specified, architected, and built using **Antigravity**. Here is the story of how it came to be.
+Welcome to a meta-post about how I created this blog. I used a structured vibe-coding approach with Google Antigravity. The blog was carefully specified, architected, and built using **Antigravity**. Here is the story of how it came to be. In the text below - "we" refers to me and Antigravity, since this was a pair programming exercise.
 
 ## 1. The Specification
 
@@ -20,7 +20,7 @@ Key requirements from our [Spec](https://github.com/divyavanmahajan/astro-blog/b
 
 ## 2. The Architecture
 
-We chose **[Astro](https://astro.build/)** for its "Zero JS by default" philosophy. This ensures the site is incredibly fast.
+I chose **[Astro](https://astro.build/)** for its "Zero JS by default" philosophy. This ensures the site is incredibly fast.
 
 ### Core Stack
 - **Framework**: Astro v4
