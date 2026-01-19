@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+
+// Fetch recent posts
+const posts = (await getCollection('blog'))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 5);
+
+// Get unique tags
+const allPosts = await getCollection('blog');
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+---
+
+<aside class="sidebar">
+    <!-- Search Widget Placeholder -->
+    <div class="widget search-widget">
+        <h3 class="widget-title">Search</h3>
+        <input type="text" placeholder="Search..." disabled style="width: 100%; padding: 0.5rem;" />
+    </div>
+
+    <!-- Recent Posts Widget -->
+    <div class="widget recent-posts">
+        <h3 class="widget-title">Recent Posts</h3>
+        <ul>
+            {posts.map((post) => (
+                <li>
+                    <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+                </li>
+            ))}
+        </ul>
+    </div>
+
+    <!-- Tag Cloud Widget -->
+    <div class="widget tag-cloud">
+        <h3 class="widget-title">Tags</h3>
+        <div class="tags">
+            {tags.map((tag) => (
+                <a href={`/tags/${tag}`} class="tag-link">{tag}</a>
+            ))}
+        </div>
+    </div>
+</aside>
+
+<style>
+    .widget {
+        margin-bottom: 2rem;
+        background: #fff;
+        padding: 1.5rem;
+        border: 1px solid var(--color-border);
+    }
+
+    .widget-title {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--color-primary);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+    }
+
+    .recent-posts ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .recent-posts li {
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+    }
+    
+    .recent-posts li:last-child {
+        border-bottom: none;
+    }
+
+    .recent-posts a {
+        color: var(--color-text);
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tag-link {
+        background: var(--color-secondary);
+        color: #fff;
+        padding: 0.2rem 0.6rem;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        border-radius: 2px;
+    }
+
+    .tag-link:hover {
+        background: var(--color-primary);
+        text-decoration: none;
+    }
+</style>

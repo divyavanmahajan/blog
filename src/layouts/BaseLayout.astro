@@ -1,0 +1,46 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+    withSidebar?: boolean;
+}
+
+const { title, description = "A minimalist technical blog", withSidebar = true } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<Header />
+        
+        <div class="container grid-layout">
+            <main class="content">
+                <slot />
+            </main>
+            
+            {withSidebar && <Sidebar />}
+        </div>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+    /* If sidebar is disabled, center content or maximize width */
+    :global(.grid-layout) {
+         /* inherited from global.css, but logic handled there via grid */
+    }
+</style>

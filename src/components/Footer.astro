@@ -1,0 +1,27 @@
+---
+const today = new Date();
+---
+
+<footer class="site-footer">
+    <div class="container">
+        &copy; {today.getFullYear()} Astro Blog. All rights reserved.
+        <br />
+        Powered by <a href="https://astro.build" target="_blank">Astro</a>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        background-color: var(--color-secondary);
+        color: #ddd;
+        padding: 2rem 0;
+        text-align: center;
+        margin-top: auto;
+        font-size: 0.9rem;
+    }
+
+    .site-footer a {
+        color: #fff;
+        text-decoration: underline;
+    }
+</style>

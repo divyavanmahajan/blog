@@ -1,0 +1,80 @@
+---
+const { siteTitle = "ASTRO BLOG" } = Astro.props;
+---
+
+<header class="site-header">
+    <div class="header-top container">
+        <h1 class="site-title"><a href="/">{siteTitle}</a></h1>
+        <p class="site-subtitle">Notes on the margins</p>
+    </div>
+    
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/categories/coding">Coding</a></li>
+                <li><a href="/categories/personal">Personal</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<style>
+    .site-header {
+        background: var(--color-surface);
+        margin-bottom: 2rem;
+    }
+
+    .header-top {
+        padding: 2rem 1rem;
+    }
+
+    .site-title {
+        font-size: 2.5rem;
+        text-transform: uppercase;
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    .site-title a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .site-subtitle {
+        color: var(--color-text-light);
+        margin: 0.5rem 0 0;
+        font-size: 0.9rem;
+    }
+
+    .main-nav {
+        background-color: var(--color-secondary);
+        color: #fff;
+    }
+
+    .menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .menu li a {
+        display: block;
+        padding: 1rem 1.5rem;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s;
+    }
+
+    .menu li a:hover {
+        background-color: #333;
+        border-bottom-color: var(--color-primary);
+    }
+</style>

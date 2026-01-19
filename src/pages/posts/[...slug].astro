@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+	<article class="post-single">
+        <header class="post-header">
+            <h1 class="post-title">{post.data.title}</h1>
+            <div class="post-meta">
+                <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString('en-us', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                    })}
+                </time>
+                &bull; 
+                <span>{post.data.author || 'Author'}</span>
+            </div>
+        </header>
+
+        <div class="post-content">
+            <Content />
+        </div>
+
+        <footer class="post-footer">
+            <div class="post-tags">
+                Tags: 
+                {post.data.tags.map(tag => (
+                   <a href={`/tags/${tag}`}>{tag}</a> 
+                ))}
+            </div>
+        </footer>
+    </article>
+</BaseLayout>
+
+<style>
+    .post-single {
+        background: #fff;
+        padding: 2rem; /* Using padding to simulate the 'card' look */
+        border: 1px solid var(--color-border);
+    }
+
+    .post-title {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .post-meta {
+        color: var(--color-text-light);
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 1rem;
+    }
+
+    .post-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+
+    /* Markdown content styles */
+    .post-content :global(h2) {
+        margin-top: 2rem;
+        font-size: 1.8rem;
+    }
+
+    .post-content :global(p) {
+        margin-bottom: 1.5rem;
+    }
+    
+    .post-content :global(a) {
+        text-decoration: underline;
+    }
+
+    .post-tags {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+        font-weight: bold;
+    }
+
+    .post-tags a {
+        background: #eee;
+        padding: 0.2rem 0.5rem;
+        margin-left: 0.5rem;
+        font-weight: normal;
+        color: #333;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+</style>
