@@ -24,7 +24,7 @@ This project is a static site generated using **[Astro](https://astro.build/)**.
 │   │   ├── TableOfContents.astro # Post navigation TOC
 │   │   └── ProfileImage.astro  # Circular profile image
 │   ├── content/        # Markdown content source
-│   │   └── blog/       # Blog posts
+│   │   └── blog/       # Blog posts (organized by YYYY/MM/)
 │   │   └── config.ts   # Content Collection Schema (Zod)
 │   ├── layouts/        # Page wrappers (BaseLayout.astro)
 │   ├── pages/          # File-based routing
@@ -45,7 +45,7 @@ This project is a static site generated using **[Astro](https://astro.build/)**.
 
 ## 3. Data Flow
 
-1.  **Authoring**: Content is written in Markdown files in `src/content/blog/`.
+1.  **Authoring**: Content is written in Markdown files in `src/content/blog/ (organized by YYYY/MM/)`.
 2.  **Validation**: `src/content/config.ts` defines a **Zod schema**. Astro validates all frontmatter at build time, preventing broken builds due to missing fields (e.g., missing `title` or invalid `date`).
 3.  **Collection API**: Pages query data using `getCollection('blog')`.
 4.  **Routing**:

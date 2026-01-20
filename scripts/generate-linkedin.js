@@ -83,14 +83,14 @@ function transformUrls(markdown, slug) {
     content = content.replace(/!\[([^\]]*)\]\((?!http)(\/[^\)]+)\)/g, `![$1](${SITE_URL}$2)`);
     content = content.replace(/!\[([^\]]*)\]\((?!http)(\.\/[^\)]+)\)/g, (match, p1, p2) => {
         const cleanedPath = p2.replace('./', '');
-        return `![${p1}](${SITE_URL}/blog/${slug}/${cleanedPath})`;
+        return `![${p1}](${SITE_URL}/posts/${slug}/${cleanedPath})`;
     });
 
     // Transform links: [text](/path) -> [text](https://divyavanmahajan.github.io/path)
     content = content.replace(/\[([^\]]*)\]\((?!http)(\/[^\)]+)\)/g, `[$1](${SITE_URL}$2)`);
     content = content.replace(/\[([^\]]*)\]\((?!http)(\.\/[^\)]+)\)/g, (match, p1, p2) => {
         const cleanedPath = p2.replace('./', '');
-        return `[${p1}](${SITE_URL}/blog/${slug}/${cleanedPath})`;
+        return `[${p1}](${SITE_URL}/posts/${slug}/${cleanedPath})`;
     });
 
     // Transform custom TOC component/placeholder
@@ -110,7 +110,7 @@ function generateHtmlArticle(frontmatter, markdown, slug) {
 </head>
 <body>
     <h1>${frontmatter.title}</h1>
-    <p><em>Originally published at <a href="${SITE_URL}/blog/${slug}">${SITE_URL}</a></em></p>
+    <p><em>Originally published at <a href="${SITE_URL}/posts/${slug}">${SITE_URL}</a></em></p>
     <hr>
     ${htmlBody}
 </body>

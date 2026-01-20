@@ -19,9 +19,17 @@ Welcome to a meta-post about how I created my blog which is hosted at [https://v
 
 I used Antigravity to build this blog using a structured vibe-coding approach. The blog was carefully specified, architected, and then built with **Antigravity**. Here is the story of how it came to be. 
 
-## The Specification
+## Specification Grounding
 
-I started by working with Antigravity to create a [spec.md](https://github.com/divyavanmahajan/astro-blog/blob/main/docs/spec.md) file. This used a structured approach to define the requirements for the blog. I started with a simple idea and got Antigravity to refine it by asking clarifying questions and providing suggestions. So before writing a single line of code, I defined exactly what this blog should be. I wanted a lightweight, easy-to-manage site that prioritizes performance. 
+I started by working with Antigravity to create a [spec.md](https://github.com/divyavanmahajan/astro-blog/blob/main/docs/spec.md) file. This used a structured approach to define the requirements for the blog. This approach is outlined in https://cursor.com/blog/agent-best-practices which describes the process of working with an AI agent to build a product.
+
+- Ask clarifying questions about your requirements
+- Create a detailed implementation plan with file paths and code references
+- Wait for your approval before building
+
+I used the prompts from https://unstract.com/blog/specification-grounding-vibe-coding/ for this process. As the page suggests "**Your first job as someone engaging in LLM-powered development is to counter their eagerness by “grounding” the LLM with specifications that are as tight as possible. Turns out, this works like magic and can be the difference between a “runaway app” that the LLM has created ,which is far from what you need, and an app that is the stuff of your dreams.**".
+
+The approach allowed me to define exactly what this blog should be and get Antigravity to refine it by asking clarifying questions and providing suggestions. So before writing a single line of code, I defined exactly what this blog should be. I wanted a lightweight, easy-to-manage site that prioritizes performance. 
 
 Key requirements from the [Spec](https://github.com/divyavanmahajan/astro-blog/blob/main/docs/spec.md):
 - **Workflow**: Direct markdown editing in VS Code. No complex headless CMS.
