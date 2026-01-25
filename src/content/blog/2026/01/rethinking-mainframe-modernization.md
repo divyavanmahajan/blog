@@ -337,6 +337,20 @@ Modern systems are complex because:
 
 CICS enforced discipline by *removing choice*. We could do the same today—we just choose not to.
 
+* Modern complexity is often unnecessary:
+
+  * Microservices inside a single domain
+  * Event-driven logic for CRUD
+  * Kubernetes, service meshes, reactive programming for transactional code
+* Real benefits can come from:
+
+  * Centralized transaction management
+  * Modular monolith discipline
+  * Explicit, auditable authorization
+  * Stable resource naming and policy enforcement
+* Mainframe principles of discipline, cohesion, and predictable transactions still apply and reduce operational and security complexity
+
+
 ## Conclusion
 
 The cloud didn't kill mainframes—**it recreated them without admitting it.**
