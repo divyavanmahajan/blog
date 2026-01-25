@@ -5,12 +5,14 @@ pubDate: 2026-01-25
 category: 'security'
 tags: ['java', 'security', 'authorization', 'keycloak', 'racf', 'enterprise']
 categories: ["Security", "Architecture"]
-heroImage: "/images/authorization-security.png"
+heroImage: "/images/racf-style-authorization.png"
 author: "Divya van Mahajan"
 series: "modernization-003"
-linkedin: false
+linkedin: true
 linkedinMessage: "Modernization 3: RACF-style authorization in modern Java applications"
 ---
+
+![RACF-Style Authorization](/images/racf-style-authorization.png)
 
 ## Introduction
 
