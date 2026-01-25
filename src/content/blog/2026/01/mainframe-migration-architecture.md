@@ -1,53 +1,23 @@
 ---
-title: "Modern Java and Mainframe Migration"
-description: "A deep dive into replacing legacy mainframe systems with modern Java architectures, focusing on modular monoliths, centralized transactions, and RACF-style authorization."
-pubDate: "2026-01-25"
-categories: ["Architecture"]
-tags: ["java", "mainframe", "migration", "security", "architecture", "quarkus"]
+title: "Mainframe Migration Strategies: Modular Monoliths & Security"
+description: "A comprehensive guide to replacing legacy mainframe systems with modern Java architectures, featuring Modular Monoliths, centralized transactions, and RACF-style security."
+pubDate: "2026-01-26"
+categories: ["Architecture", "Migration"]
+tags: ["mainframe", "migration", "architecture", "security", "keycloak", "quarkus"]
 heroImage: "/images/mainframe-to-cloud.png"
 author: "Divya van Mahajan"
+draft: true
 ---
-A deep dive into replacing legacy mainframe systems with modern Java architectures, focusing on modular monoliths, centralized transactions, and RACF-style authorization. Over the weekend, one train of thought gathered my attention. It was about patterns in behavior. As we moved from mainframes to Java and look at tackling modernization - I was curious about how much are we just re-inventing the wheel. Here are my rough notes. This is not an opinion rather more an exploration that will evolve.
 
-## 1. Evolution of Enterprise Java
+# Introduction
 
-- EJB (Enterprise Java Beans) in early 2000s promised:
-  - Simplified distributed transactions
-  - Declarative security
-  - Clustering and failover
-- EJB was widely used in legacy systems but later replaced by:
-  - Spring (developer-friendly, flexible)
-  - Quarkus / Micronaut (cloud-native, fast startup)
-- Legacy systems still use EJB because:
-  - Stability and reliability are critical
-  - Risk and cost of rewriting are high
-  - Enterprise operations, audits, and certifications are already in place
-- Modern cloud-native frameworks optimize for:
-  - Developer velocity
-  - Containerization
-  - Horizontal scaling
-- EJB replaced earlier technologies like CORBA and homegrown middleware, but it became heavy and less appealing over time.
+Replacing legacy mainframe systems is one of the toughest challenges in software engineering. This article dives into how to replace systems like CICS and RACF with modern Java architectures, focusing on **modular monoliths** and **centralized transactions**. We'll look at why 'modern' microservices aren't always the answer and how to apply mainframe discipline to distributed systems.
+
+We examine how to bring mainframe-inspired discipline to modern Java monoliths, through **modular design, centralized transaction management, batch and online processing integration, and RACF-style authorization**. Using Keycloak, a monolith can enforce centralized, auditable, resource-based access controls similar to RACF, with stable resource names, explicit action checks, and comprehensive auditing. Compared with SAP-style authorization, Keycloak provides more flexible hierarchical resources and better cloud integration while maintaining centralized policy decision-making. The overarching lesson is that modern systems often layer complexity to compensate for flexibility, whereas the **mainframe principles of discipline, cohesion, and predictable transactions** remain highly effective when consciously applied.
 
 ---
 
-## 2. Using Modern Stacks on JBoss
-
-- JBoss versions matter:
-  - AS 5/6 → very old, limited compatibility
-  - EAP 6/7 / WildFly → more modern, Jakarta EE support
-- Hosting modern apps:
-  - Spring MVC / Spring Core apps → possible via WAR deployment
-  - Spring Boot → possible but loses embedded container benefits
-  - JAX-RS / REST APIs → works well
-  - Microservices / Quarkus → better as standalone services
-- Common pattern:
-  - Keep legacy JBoss apps
-  - Deploy modern services alongside (Boot/Quarkus)
-  - Use API gateway or reverse proxy
-
----
-
-## 3. Replacing Mainframe Applications
+## 1. Replacing Mainframe Applications
 
 - Principle: prioritize **correctness and predictability**
 - Architecture: modular monolith first, microservices later
@@ -73,7 +43,7 @@ A deep dive into replacing legacy mainframe systems with modern Java architectur
 
 ---
 
-## 4. CICS and DB2 Replacements
+## 2. CICS and DB2 Replacements
 
 - **CICS replacement:**
   - Java service classes + JTA transactions
@@ -87,7 +57,7 @@ A deep dive into replacing legacy mainframe systems with modern Java architectur
 
 ---
 
-## 5. Why Modern Replacements Are Complex
+## 3. Why Modern Replacements Are Complex
 
 - CICS is compact due to:
   - Vertical integration
@@ -109,7 +79,7 @@ A deep dive into replacing legacy mainframe systems with modern Java architectur
 
 ---
 
-## 6. Modular Monolith Design (CICS-style)
+## 4. Modular Monolith Design (CICS-style)
 
 - Structure:
 
@@ -141,7 +111,7 @@ app/
 
 ---
 
-## 7. RACF-Style Authorization
+## 5. RACF-Style Authorization
 
 - Centralized, auditable, resource-based
 - Concepts:
@@ -168,7 +138,7 @@ public class AccountService {
 
 ---
 
-## 8. Keycloak vs SAP Authorization
+## 6. Keycloak vs SAP Authorization
 
 | Aspect      | Keycloak (RACF-style)      | SAP                                         |
 | ----------- | -------------------------- | ------------------------------------------- |
@@ -184,7 +154,7 @@ public class AccountService {
 
 ---
 
-## 9. Honest Lessons
+## 7. Honest Lessons
 
 * Modern complexity is often unnecessary:
 
@@ -201,7 +171,7 @@ public class AccountService {
 
 ---
 
-## 10. Summary
+## 8. Summary
 
 * Modern Java can replace mainframes using **modular monoliths**, **centralized transactions**, and **RACF-style authorization**, leveraging frameworks like **Quarkus** and **Keycloak**.
 * Cloud services often replicate mainframe features under new names.
