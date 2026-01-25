@@ -6,7 +6,7 @@ interface Props {
 const { headings } = Astro.props;
 
 // Filter to only show h2 and h3 headings
-const tocHeadings = headings.filter((h) => h.depth <= 3);
+const tocHeadings = headings.filter((h) => h.depth <= 2);
 ---
 
 {
