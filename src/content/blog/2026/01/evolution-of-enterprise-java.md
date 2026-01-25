@@ -5,17 +5,19 @@ pubDate: "2026-01-25"
 categories: ["Architecture", "History"]
 tags: ["java", "architecture", "history", "spring", "quarkus", "jakarta-ee"]
 heroImage: "/images/java-evolution.png"
-heroImageAlt: "A conceptual illustration showing the evolution of Java from a heavy coffee cup (EJB) to a fast-flying bird (Quarkus)."
+heroImageAlt: "A conceptual illustration showing the evolution of Java from a slow sloth (Java EE) to a fast-flying bird (Quarkus), with respective logos underneath."
 author: "Divya van Mahajan"
 series: "modernization-001"
 linkedin: true
 linkedinMessage: "Modernization 1:Evolution of Enterprise Java: From EJB to Quarkus"
 ---
 
+![How Enterprise Java Evolved: EJB to Quarkus](/images/java-evolution.png)
+
 # Introduction
 
 Enterprise Java was once synonymous with "heavyweight complexity" and "slow developer cycles." EJB promised the world—distributed transactions, declarative security, and clustering—but delivered a developer experience so painful it nearly broke the ecosystem.
-
+/
 In this retrospective, I explore the rise and fall of Enterprise Java Beans (EJB), the POJO rebellion led by Spring, and how modern frameworks like Quarkus are finally bringing "instant" performance to the cloud-native era. This journey isn't just about code; it's about the shift from centralized infrastructure to disposable, high-velocity services.
 
 ---
@@ -213,4 +215,4 @@ Massive EJB systems are the "new mainframes." They are stable, mission-critical,
 
 If these architectural deep-dives help you, **follow me** for more insights on enterprise architecture and modernization strategies.
 
-`#MainframeModernization` `#SoftwareArchitecture` `#CloudNative` `#EnterpriseJava` `#Quarkus` `#TechLeadership`
+`#SoftwareArchitecture` `#CloudNative` `#EnterpriseJava` `#Quarkus` `#TechLeadership`
