@@ -29,7 +29,7 @@ draft: false                 # Prevents build in production
 
 - **Layout**: 
     - **Header**: Bold, capitalized site title with clear subtitle.
-    - **Navigation**: High contrast bar (Dark background, white text, Red accent).
+    - **Navigation**: High contrast bar (Dark background, white text, Red accent) with links: Home, Categories, Tags, About.
     - **Content**: Clean list of posts with thumbnails.
     - **Sidebar** (Right): 
         - **Search**: Client-side search with real-time filtering
@@ -51,7 +51,9 @@ draft: false                 # Prevents build in production
     - GitHub Pages
 - **CI/CD**: GitHub Actions for automated updates on commit (Multi-target deploy).
 
-## 6. Site Structure (Initial)
+## 6. Site Structure (Expanded)
 - **Home**: Blog Feed
 - **Pages**: About
-- **Categories**: Coding, Personal (Starter set)
+- **Overview Pages**: 
+    - **/categories**: List of all categories with post count, latest post date, and link to latest post. Supports sorting by alphabetical order or recent activity.
+    - **/tags**: List of all tags with post count, latest post date, and link to latest post. Supports sorting by alphabetical order or recent activity.

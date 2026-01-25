@@ -1,0 +1,298 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+const categories = new Map();
+
+allPosts.forEach((post) => {
+    // Only process published posts
+    if (post.data.draft) return;
+
+    post.data.categories.forEach((category) => {
+        if (!categories.has(category)) {
+            categories.set(category, {
+                name: category,
+                count: 0,
+                lastPost: post,
+            });
+        }
+
+        const catData = categories.get(category);
+        catData.count += 1;
+
+        // Update if this post is newer
+        if (post.data.pubDate > catData.lastPost.data.pubDate) {
+            catData.lastPost = post;
+        }
+    });
+});
+
+const sortedCategories = Array.from(categories.values()).sort((a, b) =>
+    a.name.localeCompare(b.name),
+);
+---
+
+<BaseLayout title="Categories" description="All blog categories">
+    <div class="page-header">
+        <h1>Categories</h1>
+        <div class="controls">
+            <div class="search-control">
+                <input
+                    type="text"
+                    id="category-search"
+                    placeholder="Search categories..."
+                    oninput="filterCategories(this.value)"
+                />
+            </div>
+            <div class="sort-control">
+                <button
+                    id="sort-alpha"
+                    class="active"
+                    onclick="sortCategories('alpha')">Name (A-Z)</button
+                >
+                <button id="sort-date" onclick="sortCategories('date')"
+                    >Last Updated</button
+                >
+            </div>
+        </div>
+    </div>
+
+    <div id="categories-grid" class="categories-grid">
+        {
+            sortedCategories.map((category) => (
+                <div
+                    class="category-card"
+                    data-name={category.name}
+                    data-date={category.lastPost.data.pubDate.getTime()}
+                >
+                    <div class="category-header">
+                        <h2>
+                            <a
+                                href={`${import.meta.env.BASE_URL}categories/${category.name.toLowerCase()}/`}
+                            >
+                                {category.name}
+                            </a>
+                        </h2>
+                        <span class="badge">{category.count} posts</span>
+                    </div>
+
+                    <div class="latest-update">
+                        <span class="label">Latest:</span>
+                        <a
+                            href={`${import.meta.env.BASE_URL}posts/${category.lastPost.slug}/`}
+                        >
+                            {category.lastPost.data.title}
+                        </a>
+                        <time
+                            datetime={category.lastPost.data.pubDate.toISOString()}
+                        >
+                            {category.lastPost.data.pubDate.toLocaleDateString(
+                                "en-us",
+                                {
+                                    year: "numeric",
+                                    month: "short",
+                                    day: "numeric",
+                                },
+                            )}
+                        </time>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</BaseLayout>
+
+<script>
+    function filterCategories(query) {
+        const grid = document.getElementById("categories-grid");
+        const cards = Array.from(grid.children) as HTMLElement[];
+        const searchTerm = query.toLowerCase();
+
+        cards.forEach((card) => {
+            const name = card.dataset.name.toLowerCase();
+            if (name.includes(searchTerm)) {
+                card.style.display = "";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+
+    function sortCategories(method) {
+        const grid = document.getElementById("categories-grid");
+        const cards = Array.from(grid.children);
+
+        // Update buttons
+        document
+            .querySelectorAll(".sort-control button")
+            .forEach((btn) => btn.classList.remove("active"));
+        document.getElementById(`sort-${method}`).classList.add("active");
+
+        cards.sort((a, b) => {
+            if (method === "alpha") {
+                return a.dataset.name.localeCompare(b.dataset.name);
+            } else {
+                return b.dataset.date - a.dataset.date; // Newest first
+            }
+        });
+
+        cards.forEach((card) => grid.appendChild(card));
+    }
+
+    // Attach to window for button access
+    window.sortCategories = sortCategories;
+    window.filterCategories = filterCategories;
+</script>
+
+<style>
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--color-border);
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .page-header h1 {
+        margin: 0;
+    }
+
+    .controls {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .search-control input {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        min-width: 200px;
+    }
+
+    .sort-control {
+        display: flex;
+    }
+
+    .sort-control button {
+        background: transparent;
+        border: 1px solid #ccc;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+    }
+
+    .sort-control button:first-child {
+        border-right: none;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .sort-control button:last-child {
+        border-radius: 0 4px 4px 0;
+    }
+
+    .sort-control button.active {
+        background: var(--color-primary);
+        color: white;
+        border-color: var(--color-primary);
+    }
+
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .category-card {
+        background: white;
+        border: 1px solid var(--color-border);
+        padding: 1.5rem;
+        border-radius: 4px;
+        transition:
+            transform 0.2s,
+            box-shadow 0.2s;
+    }
+
+    .category-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .category-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .category-header a {
+        text-decoration: none;
+        color: var(--color-text);
+    }
+
+    .category-header a:hover {
+        color: var(--color-primary);
+    }
+
+    .badge {
+        background: #eee;
+        padding: 0.2rem 0.6rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        color: #666;
+    }
+
+    .latest-update {
+        font-size: 0.9rem;
+    }
+
+    .latest-update .label {
+        display: block;
+        color: #888;
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .latest-update a {
+        display: block;
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .latest-update time {
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+        .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .categories-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
