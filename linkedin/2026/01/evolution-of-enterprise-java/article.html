@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>How Enterprise Java Evolved: EJB to Quarkus</title>
+</head>
+<body>
+    <h1>How Enterprise Java Evolved: EJB to Quarkus</h1>
+    <p><em>Originally published at <a href="https://divyavanmahajan.github.io/posts/2026/01/evolution-of-enterprise-java">https://divyavanmahajan.github.io</a></em></p>
+    <hr>
+    <p><img src="https://divyavanmahajan.github.io/images/java-evolution.png" alt="How Enterprise Java Evolved: EJB to Quarkus"></p>
+<h1>Introduction</h1>
+<p>Enterprise Java was once synonymous with &quot;heavyweight complexity&quot; and &quot;slow developer cycles.&quot; EJB promised the world—distributed transactions, declarative security, and clustering—but delivered a developer experience so painful it nearly broke the ecosystem.
+/
+In this retrospective, I explore the rise and fall of Enterprise Java Beans (EJB), the POJO rebellion led by Spring, and how modern frameworks like Quarkus are finally bringing &quot;instant&quot; performance to the cloud-native era. This journey isn&#39;t just about code; it&#39;s about the shift from centralized infrastructure to disposable, high-velocity services.</p>
+<hr>
+<h2>1. The Context: What existed <em>before</em> EJB?</h2>
+<p>EJB wasn’t invented in a vacuum. It was a reaction to the chaos that came before it.</p>
+<h3>CORBA</h3>
+<p>EJB’s biggest “enemy” in the 90s.</p>
+<ul>
+<li>Language-agnostic distributed objects</li>
+<li>IDL, ORBs, remote method calls</li>
+<li>Extremely complex</li>
+<li>Painful debugging</li>
+<li>Vendor incompatibilities</li>
+</ul>
+<p>EJB said: &gt; “CORBA, but Java-only and standardized.”
+<strong>CORBA lost. Hard.</strong> It survives only in niche legacy systems.</p>
+<h3>COM / DCOM (Microsoft)</h3>
+<ul>
+<li>Windows-only</li>
+<li>Powerful but tightly coupled to Microsoft</li>
+<li>Licensing + platform lock-in</li>
+</ul>
+<p>EJB was the <em>cross-platform</em> answer.</p>
+<h3>Custom in-house frameworks</h3>
+<p>Every big company had homegrown transaction managers, security frameworks, object pools, and thread management.
+EJB promised: &gt; “Stop reinventing this badly.”
+That promise was <em>actually valid</em>.</p>
+<hr>
+<h2>2. The Promise &amp; The Reality (EJB 1.x / 2.x)</h2>
+<p>In the early 2000s, EJB (Enterprise Java Beans) promised to solve the chaos by providing:</p>
+<ul>
+<li>Simplified distributed transactions</li>
+<li>Declarative security</li>
+<li>Clustering and failover</li>
+</ul>
+<h3>Why early EJBs fell out of favor</h3>
+<p><strong>EJB 1.x / 2.x were… painful.</strong>
+They promised “write business logic, the container handles everything else.” In practice you got:</p>
+<ul>
+<li>Tons of boilerplate (home interfaces, remote interfaces, deployment descriptors the size of novels)</li>
+<li>Heavyweight app servers (WebLogic, WebSphere, JBoss) that took minutes to start</li>
+<li>Tight coupling to the container → awful developer experience</li>
+<li>Hard-to-test code (unit testing outside the container was a nightmare)</li>
+</ul>
+<p>Simple CRUD required 3–4 interfaces, massive XML configs, and remote calls even when everything lived on the same JVM. Developers revolted.</p>
+<hr>
+<h2>3. The Backlash: Spring + POJOs</h2>
+<p>Around <strong>2003–2005</strong>, Spring showed up and basically said:</p>
+<blockquote>
+<p>“What if enterprise Java… but not miserable?”</p>
+</blockquote>
+<p>Spring offered:</p>
+<ul>
+<li>Plain Old Java Objects (POJOs)</li>
+<li>Dependency Injection without EJB containers</li>
+<li>Declarative transactions without EJB ceremony</li>
+<li>Easy unit testing</li>
+</ul>
+<p>This was <em>huge</em>. Spring didn’t kill EJBs directly — it exposed how over-engineered they were.</p>
+<h3>Spring fixed the <em>developer experience</em></h3>
+<p>EJB optimized for Ops, Vendors, and Architects.
+Spring optimized for <strong>Developers, Testing, and Change</strong>.
+Guess who won.</p>
+<hr>
+<h2>4. The Response: EJB 3.x Redemption (Sort of)</h2>
+<p>Sun (later Oracle) eventually got the message, releasing <strong>EJB 3.0 in Java EE 5 (~2006)</strong> as a massive course correction. It adopted annotations instead of XML, removed the need for home/remote interfaces for local beans, and replaced entity beans with JPA, bringing the experience much closer to Spring’s programming model.</p>
+<p>At this point, EJBs were actually fine—but the damage was done. Developers had already learned Spring, migrated their apps, and lost trust in heavyweight Java EE servers. So even though the technology improved, the excitement never returned.</p>
+<hr>
+<h2>5. Evolution: Microservices &amp; The Cloud</h2>
+<h3>EJB servers evolved and rebranded</h3>
+<ul>
+<li><strong>Terms Used</strong>: &quot;EJB Server&quot; / &quot;Enterprise Application Server&quot; ➔ &quot;Jakarta EE&quot; / &quot;Lightweight Runtime&quot;</li>
+<li><strong>Architecture</strong>: Monolithic, Heavyweight ➔ Modular, Cloud-Ready, Fast Startup</li>
+<li><strong>Examples</strong>: WebLogic, WebSphere, Legacy JBoss ➔ WildFly, Payara, Open Liberty</li>
+</ul>
+<h3>The final nail: microservices</h3>
+<p>Once Docker + Kubernetes + cloud-native happened, monolithic app servers fell out of fashion. Fast startup, low memory, and horizontal scaling became key.
+<strong>Spring Boot won here.</strong> It starts in seconds, has no “app server” feeling, and is easy to containerize.</p>
+<p><strong>Microservices killed the “big iron” assumption.</strong>
+EJB assumed centralized app servers, long-lived processes, and heavy shared infrastructure. Modern systems assume disposable services, horizontal scaling, and normal failure. EJB wasn’t <em>wrong</em> — it was <strong>built for a different world</strong>.</p>
+<h3>The Cloud-Native Peak: Quarkus and GraalVM</h3>
+<p>The evolution didn&#39;t stop at Spring Boot. While Spring Boot simplified the developer experience, it still relied on a relatively heavy JVM footprint. Enter <strong>Quarkus</strong> and its &quot;Supersonic Subatomic&quot; approach.</p>
+<p>By leveraging <strong>GraalVM</strong> and <strong>AOT (Ahead-of-Time) compilation</strong>, Quarkus can compile Java applications into native executables. The results are transformative:</p>
+<ul>
+<li><strong>Startup Times</strong>: From seconds to milliseconds.</li>
+<li><strong>Memory Footprint</strong>: Reduced by as much as 90% compared to traditional stacks.</li>
+<li><strong>Scale-to-Zero</strong>: Perfect for serverless environments where cold starts are the enemy.</li>
+</ul>
+<p>This represents the final closure of the &quot;heavyweight&quot; Java chapter. We&#39;ve moved from an era where a server start was a ritual, to an era where a service is alive before the HTTP request even hits the load balancer.</p>
+<hr>
+<h2>6. The Aftermath: Where are we now?</h2>
+<h3>Slow death of Jakarta EE</h3>
+<p>EJBs are the ghost of enterprise Java past. EJB didn’t fail, instead it <strong>aged out of being the center of gravity</strong>. Short version: they didn’t <em>die</em> so much as get… quietly absorbed, slimmed down, and renamed until nobody wanted to say “EJB” out loud anymore. Java EE used to be <em>the</em> way to do enterprise Java, but it lost that position to Spring Boot. That’s a massive psychological shift.</p>
+<p>Early EJBs were overengineered and dev-hostile. Spring exposed a better way. EJB 3 fixed most issues — too late. “EJB servers” became lighter Jakarta EE runtimes. Microservices finished the shift away from monoliths. The ideas won; the branding lost.</p>
+<h3>Where EJB ideas live today</h3>
+<p>The <em>ideas</em> survived, even if the brand didn’t. The Quiet Irony is that modern systems quietly re-implement EJB ideas:</p>
+<ul>
+<li>Transaction managers → Spring / Saga patterns</li>
+<li>Security → OAuth, IAM, service meshes</li>
+<li>Remoting → REST/gRPC</li>
+<li>Containers → Kubernetes</li>
+</ul>
+<p>We didn’t delete enterprise complexity. We <strong>spread it out</strong>.</p>
+<ul>
+<li><strong>Dependency Injection</strong>: CDI / Spring DI</li>
+<li><strong>Transactions</strong>: @Transactional</li>
+<li><strong>Stateless services</strong>: Spring services / Jakarta beans</li>
+<li><strong>Persistence</strong>: JPA / Hibernate</li>
+<li><strong>Security</strong>: Annotations + filters</li>
+</ul>
+<h3>Why people <strong>still use EJBs</strong> (yes, in 2026)</h3>
+<p>People still use EJB because it’s stable, paid for, and trusted.
+<strong>Legacy gravity is real.</strong> Massive systems written 15–25 years ago with millions of lines of code are extremely expensive to rewrite. “If it ain’t broke, don’t touch it” prevails. Rewriting an EJB system is often <strong>riskier than keeping it</strong>.</p>
+<p>Also, <strong>EJB still does some things <em>very</em> well.</strong>
+In the right environment, EJB gives you rock-solid distributed transactions, mature security models, and predictable behavior under load. If you need <em>“ACID transactions across 6 databases and 3 message brokers”</em>, EJB app servers can still be hard to beat.</p>
+<hr>
+<h2>7. Decision Guide: When to choose what?</h2>
+<h3>When would you <strong>still choose EJB today</strong>?</h3>
+<p>Short answer: <strong>rarely, but not never</strong>. You’d seriously consider EJB <em>today</em> if <strong>most</strong> of the following are true:</p>
+<ul>
+<li><strong>You need strong, centralized transactions</strong>: Multi-resource XA transactions, 2PC across databases/JMS.</li>
+<li><strong>You operate in a regulated enterprise</strong>: Banks, Insurance, Gov where app servers are certified and stability &gt; velocity.</li>
+<li><strong>You already run a Java EE stack</strong>: If you have the Ops teams and tooling, it&#39;s the least risky choice.</li>
+</ul>
+<h3>When you would <em>not</em> choose EJB</h3>
+<ul>
+<li>Greenfield startup</li>
+<li>Cloud-native microservices</li>
+<li>Fast iteration cycles / Serverless</li>
+</ul>
+<h3>Framework Comparison</h3>
+<h4><a href="https://jakarta.ee/">Jakarta EE (EJB)</a></h4>
+<ul>
+<li><strong>Where it shines</strong>: Strong consistency, mature clustering, production hardening.</li>
+<li><strong>Where it hurts</strong>: Slow startup, heavy memory, low dev velocity, poor cloud-native support.</li>
+<li><strong>Typical use</strong>: Long-running enterprise systems, legacy modernization.</li>
+<li><strong>Non-functionals</strong>: Slow startup, High memory, Excellent transactions, Excellent legacy friendliness.</li>
+</ul>
+<h4><a href="https://spring.io/projects/spring-boot">Spring Boot</a></h4>
+<ul>
+<li><strong>Where it shines</strong>: Massive ecosystem, flexible, works everywhere.</li>
+<li><strong>Where it hurts</strong>: &quot;Annotation soup&quot;, dependency sprawl, fair cloud-native support.</li>
+<li><strong>Typical use</strong>: Enterprise systems balancing speed and control.</li>
+<li><strong>Non-functionals</strong>: Fast startup, Medium memory, Very good transactions, High dev velocity.</li>
+</ul>
+<h4><a href="https://quarkus.io/">Quarkus</a></h4>
+<ul>
+<li><strong>Where it shines</strong>: Instant startup, low memory, container-first (GraalVM).</li>
+<li><strong>Where it hurts</strong>: Smaller ecosystem, learning curve.</li>
+<li><strong>Typical use</strong>: Cloud-native microservices, serverless.</li>
+<li><strong>Non-functionals</strong>: Instant startup, Low memory, Good transactions, Excellent cloud-native support, High dev velocity.</li>
+</ul>
+<hr>
+<h2>8. Modernization Strategy: The Lessons Learned</h2>
+<p>As we look back at the EJB era, several patterns emerge that are critical for today&#39;s modernization journeys, especially when moving away from mainframes or monoliths.</p>
+<h3>The Transparency Trap</h3>
+<p>One of EJB’s biggest flaws was attempting <strong>Location Transparency</strong>—making remote calls look identical to local ones. This ignored the fundamental &quot;Fallacies of Distributed Computing.&quot; Modern architectures (gRPC, REST, Service Meshes) embrace the network, making latency and failure explicit rather than hidden.</p>
+<h3>Complexity Displacement</h3>
+<p>We didn&#39;t &quot;solve&quot; enterprise complexity; we displaced it. EJB handled transactions and security inside the container. Today, we handle these via <strong>Sidecars (Istio/Linkerd)</strong>, <strong>Identity Providers (Okta/Keycloak)</strong>, and <strong>Orchestrators (Kubernetes)</strong>. The infrastructure changed, but the requirements—the &quot;Quiet Irony&quot;—remain the same.</p>
+<h3>The Legacy Gravity</h3>
+<p>Massive EJB systems are the &quot;new mainframes.&quot; They are stable, mission-critical, and incredibly expensive to move. When modernizing, the goal isn&#39;t always a full rewrite. Often, the strategy involves:</p>
+<ol>
+<li><strong>Strangler Fig Pattern</strong>: Incrementally moving services to Spring Boot or Quarkus.</li>
+<li><strong>API Facades</strong>: Wrapping legacy EJB logic in modern REST interfaces.</li>
+<li><strong>Data Synchronization</strong>: Moving data stores while logic remains in the &quot;old&quot; world.</li>
+</ol>
+<hr>
+<p><strong>What patterns have you noticed in your modernization journeys? Are you still maintaining EJB systems, or have you made the leap to Quarkus? Share your experiences in the comments below!</strong></p>
+<p>If these architectural deep-dives help you, <strong>follow me</strong> for more insights on enterprise architecture and modernization strategies.</p>
+<p><code>#SoftwareArchitecture</code> <code>#CloudNative</code> <code>#EnterpriseJava</code> <code>#Quarkus</code> <code>#TechLeadership</code></p>
+
+</body>
+</html>

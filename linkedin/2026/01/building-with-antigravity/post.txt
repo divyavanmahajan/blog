@@ -1,5 +1,5 @@
 Building This Blog with Antigravity
 
-Building a markdown blog with Antigravity from spec to deployment.
+Building a markdown blog with Astro and Antigravity from spec to deployment.
 
 Read the full article: https://www.linkedin.com/pulse/building-blog-antigravity-divya-van-mahajan-vkpfe/

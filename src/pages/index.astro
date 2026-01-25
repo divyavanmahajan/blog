@@ -4,7 +4,16 @@ import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog"))
     .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    .sort((a, b) => {
+        if (a.data.series && b.data.series) {
+            const [seriesA, seqA] = a.data.series.split("-");
+            const [seriesB, seqB] = b.data.series.split("-");
+            if (seriesA === seriesB) {
+                return parseInt(seqB || "0") - parseInt(seqA || "0");
+            }
+        }
+        return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+    });
 ---
 
 <BaseLayout title="Home | Divya van Mahajan - Things I've learned">
@@ -44,14 +53,15 @@ const posts = (await getCollection("blog"))
                                 <>
                                     &bull;
                                     <span class="series-badge">
-                                        Part of:{" "}
+                                        Part of :{" "}
                                         <a
                                             href={`${import.meta.env.BASE_URL}series/${post.data.series.split("-")[0].toLowerCase()}/`}
                                         >
                                             {post.data.series
                                                 .split("-")[0]
                                                 .replace(/[-_]/g, " ")}
-                                        </a>
+                                        </a>{" "}
+                                        part {post.data.series.split("-")[1]}
                                     </span>
                                 </>
                             )}
@@ -59,6 +69,15 @@ const posts = (await getCollection("blog"))
                     </header>
 
                     <div class="entry-content">
+                        {post.data.heroImage && (
+                            <div class="entry-thumbnail text-center">
+                                <img
+                                    src={`${import.meta.env.BASE_URL}images/icon/${post.data.heroImage.split("/").pop()}`}
+                                    alt={post.data.title}
+                                    class="post-thumbnail"
+                                />
+                            </div>
+                        )}
                         <p>{post.data.description}</p>
                     </div>
 
@@ -131,6 +150,30 @@ const posts = (await getCollection("blog"))
         margin-top: 1.5rem;
     }
 
+    .entry-content {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .entry-thumbnail {
+        flex-shrink: 0;
+        width: 250px;
+    }
+
+    .post-thumbnail {
+        width: 100%;
+        height: auto;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .entry-content p {
+        margin: 0;
+        line-height: 1.6;
+    }
+
     .read-more {
         background: var(--color-primary);
         color: #fff;
@@ -143,5 +186,16 @@ const posts = (await getCollection("blog"))
     .read-more:hover {
         background: #cc292b;
         text-decoration: none;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+        .entry-content {
+            flex-direction: column;
+        }
+        .entry-thumbnail {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
     }
 </style>

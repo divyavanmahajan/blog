@@ -5,13 +5,13 @@ pubDate: 2026-01-19
 author: "Divya van Mahajan"
 categories: ["Coding"]
 tags: ["antigravity", "astro", "architecture","genai"]
-draft: false
+heroImage: "/images/building-with-antigravity-hero.png"
 linkedin: true
-linkedinMessage: "Building a markdown blog with Antigravity from spec to deployment."
+linkedinMessage: "Building a markdown blog with Astro and Antigravity from spec to deployment."
 linkedinArticleUrl: "https://www.linkedin.com/pulse/building-blog-antigravity-divya-van-mahajan-vkpfe/"
 ---
 
-![Futuristic workspace with AI glow and Astro.js logo](/images/antigravity-hero.png)
+![Astro + Antigravity = Webpage](/images/building-with-antigravity-hero.png)
 
 I am passionate about building things and learning new things. I was inspired by [Rost Glukhov](https://glukhov.org) and [Simon Willison](https://simonwillison.net), to record and share what I've learnt. I set myself a goal to create a blog infrastructure that was low maintenance and easy to use.
                 

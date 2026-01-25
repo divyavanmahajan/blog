@@ -23,7 +23,7 @@ export async function getStaticPaths() {
                 ...post,
                 sequence: parseInt(post.data.series.split("-")[1] || "0"),
             }))
-            .sort((a, b) => a.sequence - b.sequence);
+            .sort((a, b) => b.sequence - a.sequence);
 
         return {
             params: { series },
@@ -48,7 +48,9 @@ const seriesName = seriesId.replace(/[-_]/g, " ");
             posts.map((post) => (
                 <article class="post-entry">
                     <header class="entry-header">
-                        <div class="entry-sequence">Part {post.sequence}</div>
+                        <div class="entry-sequence">
+                            Part {post.data.series.split("-")[1]}
+                        </div>
                         <h2 class="entry-title">
                             <a href={`${BASE_URL}posts/${post.slug}/`}>
                                 {post.data.title}

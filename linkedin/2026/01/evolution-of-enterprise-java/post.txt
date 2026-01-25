@@ -1,0 +1,5 @@
+How Enterprise Java Evolved: EJB to Quarkus
+
+Modernization 1:Evolution of Enterprise Java: From EJB to Quarkus
+
+Read the full article: [PASTE LINKEDIN ARTICLE URL HERE]

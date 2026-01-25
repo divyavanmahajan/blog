@@ -5,7 +5,7 @@ Originally published at https://divyavanmahajan.github.io
 ---
 
 
-![Futuristic workspace with AI glow and Astro.js logo](https://divyavanmahajan.github.io/images/antigravity-hero.png)
+![Astro + Antigravity = Webpage](https://divyavanmahajan.github.io/images/building-with-antigravity-hero.png)
 
 I am passionate about building things and learning new things. I was inspired by [Rost Glukhov](https://glukhov.org) and [Simon Willison](https://simonwillison.net), to record and share what I've learnt. I set myself a goal to create a blog infrastructure that was low maintenance and easy to use.
                 

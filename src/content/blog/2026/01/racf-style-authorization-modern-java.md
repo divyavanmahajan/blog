@@ -8,6 +8,8 @@ categories: ["Security", "Architecture"]
 heroImage: "/images/authorization-security.png"
 author: "Divya van Mahajan"
 series: "modernization-003"
+linkedin: false
+linkedinMessage: "Modernization 3: RACF-style authorization in modern Java applications"
 ---
 
 ## Introduction
@@ -575,4 +577,8 @@ The question isn't whether RACF-style authorization is relevant today. The quest
 
 ---
 
-*This post is part of a series on bringing mainframe principles to modern architectures. See also: [Rethinking Mainframe Modernization](/blog/2026/01/rethinking-mainframe-modernization)*
+**What patterns have you noticed in your modernization journeys? Share in the comments below!**
+
+If these architectural deep-dives help you, **follow me** for insights on enterprise architecture.
+
+`#MainframeModernization` `#SoftwareArchitecture` `#CloudNative` `#EnterpriseJava` `#TechLeadership`

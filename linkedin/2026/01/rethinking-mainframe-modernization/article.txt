@@ -1,20 +1,11 @@
----
-title: 'Mainframe Modernization: Will we do it right?'
-description: ' Will we have the discipline to do it right? An exploration of how legacy mainframe principles like centralized transactions, modular design, and RACF-style authorization reveal that many "cloud-native" patterns are reinventions of tried-and-true mainframe practices.'
-pubDate: 2026-01-25
-category: 'architecture'
-tags: ['java', 'mainframe', 'architecture', "migration", 'cics', 'modernization']
-categories: ["Architecture", "Migration"]
-heroImage: "/images/rethinking-mainframe-modernization.png"
-heroImageAlt: "A minimalist flat illustration of a disassembled monolith (blocks) with a puzzled child trying to put it back together."
-author: "Divya van Mahajan"
-series: "modernization-002"
-linkedin: true
-linkedinMessage: "Modernization 2: Mainframe Modernization: will we do it right?"
-linkedInUrl: "https://www.linkedin.com/pulse/mainframe-modernization-we-do-right-divya-van-mahajan-tjdxe"
+# Mainframe Modernization: Will we do it right?
+
+Originally published at https://divyavanmahajan.github.io
+
 ---
 
-![Rethinking Mainframe Modernization](/images/rethinking-mainframe-modernization.png)
+
+![Rethinking Mainframe Modernization](https://divyavanmahajan.github.io/images/rethinking-mainframe-modernization.png)
 
 ## Introduction
 
@@ -257,7 +248,7 @@ public class AccountService {
 - **Default deny** - Nothing allowed unless explicitly permitted
 - **Full audit trail** - Every decision logged for compliance
 
-This approach gives you the maintainability and auditability of RACF with the flexibility of modern IAM systems. See my other post for more details: [Implementing RACF-Style Authorization in Modern Java Applications](/blog/2026/01/racf-style-authorization-modern-java)**
+This approach gives you the maintainability and auditability of RACF with the flexibility of modern IAM systems. See my other post for more details: [Implementing RACF-Style Authorization in Modern Java Applications](https://divyavanmahajan.github.io/blog/2026/01/racf-style-authorization-modern-java)**
 
 ## What Modern Complexity Is Actually Unnecessary
 
