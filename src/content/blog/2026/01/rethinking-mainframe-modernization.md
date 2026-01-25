@@ -5,10 +5,12 @@ pubDate: 2026-01-25
 category: 'architecture'
 tags: ['java', 'mainframe', 'architecture', "migration", 'cics', 'modernization']
 categories: ["Architecture", "Migration"]
-heroImage: "/images/mainframe-to-cloud.png"
+heroImage: "/images/java-evolution.png"
 author: "Divya van Mahajan"
 series: "modernization-002"
 ---
+
+<img src="/images/java-evolution.png" alt="Modernization?" width="600" />
 
 ## Introduction
 
