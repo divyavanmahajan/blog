@@ -17,17 +17,11 @@ const { siteTitle = "Divya van Mahajan" } = Astro.props;
             <ul class="menu">
                 <li><a href={import.meta.env.BASE_URL}>Home</a></li>
                 <li>
-                    <a href={import.meta.env.BASE_URL + "categories/coding"}
-                        >Coding</a
+                    <a href={import.meta.env.BASE_URL + "categories"}
+                        >Categories</a
                     >
                 </li>
-                <!--
-                <li>
-                    <a href={import.meta.env.BASE_URL + "categories/personal"}
-                        >Personal</a
-                    >
-                </li>
-            -->
+                <li><a href={import.meta.env.BASE_URL + "tags"}>Tags</a></li>
                 <li><a href={import.meta.env.BASE_URL + "about"}>About</a></li>
             </ul>
         </div>
