@@ -7,13 +7,13 @@ tags: ["java", "architecture", "history", "spring", "quarkus", "jakarta-ee"]
 heroImage: "/images/java-evolution.png"
 author: "Divya van Mahajan"
 series: "modernization-001"
+linkedin: true
+linkedinMessage: "Modernization 1:Evolution of Enterprise Java: From EJB to Quarkus"
 ---
 
 # Introduction
 
-I wrote this to understand the evolution of enterprise Java from the early 2000s, highlighting EJB and mainframe-inspired architectures. EJB promised simplified distributed transactions, security, and scalability, yet its complexity, heavy container requirements, and poor developer experience paved the way for frameworks like Spring and cloud-native platforms.
-
-While EJB and JBoss remain in use for legacy systems, modern replacements typically involve multiple components. In this post, we explore the rise, fall, and transformation of Enterprise Java Beans (EJB) and compare them with today's dominant frameworks.
+I wrote this to understand the evolution of enterprise Java from the early 2000s, highlighting EJB and mainframe-inspired architectures. EJB promised simplified distributed transactions, security, and scalability, yet its complexity, heavy container requirements, and poor developer experience paved the way for frameworks like Spring and cloud-native platforms. In this post, I explore the rise, fall, and transformation of Enterprise Java Beans (EJB) and compare today's dominant frameworks.
 
 ---
 
@@ -98,11 +98,9 @@ At this point, EJBs were actually fine—but the damage was done. Developers had
 
 ### EJB servers evolved and rebranded
 
-| Feature | Then (Era 1) | Now (Era 2)|
-| :--- | :--- | :--- |
-| **Terms Used** | "EJB Server", "Enterprise Application Server" | "Jakarta EE", "Lightweight Runtime" |
-| **Architecture Description** | Monolithic, Heavyweight | Modular, Cloud-Ready, Fast Startup |
-| **Examples** | WebLogic, WebSphere, Legacy JBoss | WildFly, Payara, Open Liberty |
+*   **Terms Used**: "EJB Server" / "Enterprise Application Server" ➔ "Jakarta EE" / "Lightweight Runtime"
+*   **Architecture**: Monolithic, Heavyweight ➔ Modular, Cloud-Ready, Fast Startup
+*   **Examples**: WebLogic, WebSphere, Legacy JBoss ➔ WildFly, Payara, Open Liberty
 
 ### The final nail: microservices
 
@@ -132,13 +130,11 @@ The *ideas* survived, even if the brand didn’t. The Quiet Irony is that modern
 
 We didn’t delete enterprise complexity. We **spread it out**.
 
-| Old EJB Idea         | Modern Form                     |
-| -------------------- | ------------------------------- |
-| Dependency Injection | CDI / Spring DI                 |
-| Transactions         | @Transactional                  |
-| Stateless services   | Spring services / Jakarta beans |
-| Persistence          | JPA / Hibernate                 |
-| Security             | Annotations + filters           |
+*   **Dependency Injection**: CDI / Spring DI
+*   **Transactions**: @Transactional
+*   **Stateless services**: Spring services / Jakarta beans
+*   **Persistence**: JPA / Hibernate
+*   **Security**: Annotations + filters
 
 ### Why people **still use EJBs** (yes, in 2026)
 People still use EJB because it’s stable, paid for, and trusted.
@@ -162,17 +158,29 @@ Short answer: **rarely, but not never**. You’d seriously consider EJB *today* 
 *   Cloud-native microservices
 *   Fast iteration cycles / Serverless
 
-### Comparison: EJB vs Spring vs Quarkus
+### Framework Comparison
 
-| Framework | Where it shines | Where it hurts | Typical use |
-| :--- | :--- | :--- | :--- |
-| **[Jakarta EE (EJB)](https://jakarta.ee/)** | Strong consistency, mature clustering, production hardening | Slow startup, heavy memory, low dev velocity | Long-running enterprise systems, legacy modernization |
-| **[Spring Boot](https://spring.io/projects/spring-boot)** | Massive ecosystem, flexible, works everywhere | "Annotation soup", dependency sprawl | Enterprise systems balancing speed and control |
-| **[Quarkus](https://quarkus.io/)** | Instant startup, low memory, container-first (GraalVM) | Smaller ecosystem, learning curve | Cloud-native microservices, serverless |
+#### [Jakarta EE (EJB)](https://jakarta.ee/)
+*   **Where it shines**: Strong consistency, mature clustering, production hardening.
+*   **Where it hurts**: Slow startup, heavy memory, low dev velocity, poor cloud-native support.
+*   **Typical use**: Long-running enterprise systems, legacy modernization.
+*   **Non-functionals**: Slow startup, High memory, Excellent transactions, Excellent legacy friendliness.
 
-#### Non-functional comparison
-| Framework | Startup time | Memory use | Transactions | Cloud-native | Dev velocity | Legacy friendliness |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **[Jakarta EE (EJB)](https://jakarta.ee/)** | Slow | High | Excellent | Poor | Low | Excellent |
-| **[Spring Boot](https://spring.io/projects/spring-boot)** | Fast | Medium | Very good | Fair | High | Good |
-| **[Quarkus](https://quarkus.io/)** | Instant | Low | Good | Excellent | High | Fair |
+#### [Spring Boot](https://spring.io/projects/spring-boot)
+*   **Where it shines**: Massive ecosystem, flexible, works everywhere.
+*   **Where it hurts**: "Annotation soup", dependency sprawl, fair cloud-native support.
+*   **Typical use**: Enterprise systems balancing speed and control.
+*   **Non-functionals**: Fast startup, Medium memory, Very good transactions, High dev velocity.
+
+#### [Quarkus](https://quarkus.io/)
+*   **Where it shines**: Instant startup, low memory, container-first (GraalVM).
+*   **Where it hurts**: Smaller ecosystem, learning curve.
+*   **Typical use**: Cloud-native microservices, serverless.
+*   **Non-functionals**: Instant startup, Low memory, Good transactions, Excellent cloud-native support, High dev velocity.
+
+---
+**What patterns have you noticed in your modernization journeys? Share in the comments below!**
+
+If these architectural deep-dives help you, **follow me** for insights on enterprise architecture.
+
+`#MainframeModernization` `#SoftwareArchitecture` `#CloudNative` `#EnterpriseJava` `#TechLeadership`
