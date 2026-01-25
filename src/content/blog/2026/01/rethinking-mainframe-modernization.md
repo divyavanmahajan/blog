@@ -5,15 +5,16 @@ pubDate: 2026-01-25
 category: 'architecture'
 tags: ['java', 'mainframe', 'architecture', "migration", 'cics', 'modernization']
 categories: ["Architecture", "Migration"]
-heroImage: "/images/java-evolution.png"
+heroImage: "/images/rethinking-mainframe-modernization.png"
+heroImageAlt: "A minimalist flat illustration of a disassembled monolith (blocks) with a puzzled child trying to put it back together."
 author: "Divya van Mahajan"
 series: "modernization-002"
 linkedin: true
 linkedinMessage: "Modernization 2: Mainframe Modernization: will we do it right?"
-
+linkedInUrl: "https://www.linkedin.com/pulse/mainframe-modernization-we-do-right-divya-van-mahajan-tjdxe"
 ---
 
-<img src="/images/java-evolution.png" alt="Modernization?" width="600" />
+![Rethinking Mainframe Modernization](/images/rethinking-mainframe-modernization.png)
 
 ## Introduction
 
