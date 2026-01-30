@@ -56,8 +56,39 @@ draft: false                 # Prevents build in production
 
 ## 6. Site Structure (Expanded)
 - **Home**: Blog Feed
+- **TIL**: Today I Learned quick notes
 - **Pages**: About
 - **Overview Pages**: 
     - **/categories**: List of all categories with post count, latest post date, and link to latest post. Supports sorting by alphabetical order or recent activity.
     - **/series**: List of all blog series with part count and latest update. Supports sorting by alphabetical order or recent activity.
     - **/tags**: List of all tags with post count, latest post date, and link to latest post. Supports sorting by alphabetical order or recent activity.
+    - **/til**: TIL index with topic tag cloud and recent entries.
+    - **/til/tags/[tag]**: TIL entries filtered by tag.
+
+## 7. TIL Content Structure
+
+TIL (Today I Learned) is a lightweight section for quick notes and learnings.
+
+### Frontmatter Schema
+```yaml
+---
+title: "Quick Tip Title"
+description: "Brief description"
+pubDate: 2026-01-30
+updatedDate: 2026-01-31      # Optional
+tags: ["topic1", "topic2"]   # Required, no categories
+draft: false
+---
+```
+
+### Key Differences from Blog Posts
+- **No categories**: Uses tags only
+- **No series**: Standalone entries
+- **No hero images**: Simpler layout
+- **Shorter content**: Quick notes, not long-form articles
+
+### Navigation
+- **Header**: "TIL" link in main navigation
+- **Index**: `/til/` with tag cloud and recent entries
+- **RSS**: `/til/rss.xml` for feed readers
+

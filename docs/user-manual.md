@@ -38,7 +38,44 @@ draft: false               # Set to true to hide from the live site
 
 ---
 
-## 2. Adding Static Assets (Images & Files)
+## 2. Creating a TIL Entry
+
+TIL (Today I Learned) is a section for quick notes and learnings. Entries are shorter than full blog posts.
+
+### Step-by-Step
+1.  Navigate to `src/content/til/`.
+2.  Create a folder for the current year (e.g., `2026/`) and month (e.g., `01/`) if they don't exist.
+3.  Create a new file with a `.md` extension (e.g., `my-til-entry.md`).
+4.  Add the following **Frontmatter**:
+
+```yaml
+---
+title: "What I Learned Today"
+description: "Brief description"
+pubDate: 2026-01-30
+tags: ["topic1", "topic2"]
+draft: false
+---
+```
+
+5.  Write your content below the second `---`.
+
+### TIL vs Blog Posts
+| Aspect | TIL | Blog Post |
+|--------|-----|-----------|
+| Length | Short (1-2 paragraphs) | Long-form |
+| Images | Optional | Often included |
+| Categories | No | Yes |
+| Series | No | Optional |
+
+### Accessing TIL
+- **Index Page**: `/til/` - shows all TILs with tag cloud
+- **By Tag**: `/til/tags/[tag]/` - filtered by topic
+- **RSS Feed**: `/til/rss.xml`
+
+---
+
+## 3. Adding Static Assets (Images & Files)
 
 To include images, PDFs, or other downloadable files in your posts, follow these steps:
 
@@ -62,7 +99,7 @@ Place your file in the **`public/`** directory. You can organize them into subfo
 
 ---
 
-## 2. Publishing Changes
+## 4. Publishing Changes
 
 Once you have saved your Markdown file, you need to push it to GitHub to go live.
 
@@ -77,7 +114,7 @@ Once you have saved your Markdown file, you need to push it to GitHub to go live
 
 ---
 
-## 3. Troubleshooting
+## 5. Troubleshooting
 
 If your changes aren't showing up, check the following:
 
@@ -104,7 +141,7 @@ Open the localhost link shown (usually `http://localhost:4321/`).
 
 ---
 
-## 4. LinkedIn Cross-Posting
+## 6. LinkedIn Cross-Posting
 
 You can automatically generate LinkedIn-ready articles and posts from your blog content.
 
@@ -124,7 +161,7 @@ You can automatically generate LinkedIn-ready articles and posts from your blog 
     -   **Alternative**: Copy text from `article.txt` and paste it into the editor. You may need to manually re-add images.
     -   **Thumbnail**: Manually upload your blog post's cover image as the LinkedIn article thumbnail.
     -   **Short Post**: Use the text from `post.txt` to announce your new article in a standard LinkedIn update.
-6.  **Track the URL**:
+6.  **Track the URL**:w
     -   Once published, copy the LinkedIn article URL.
     -   Paste the URL into your post's frontmatter as `linkedinArticleUrl: "https://..."`.
     -   This allows the tool to generate **Update Summaries** if you change the post later.
@@ -137,7 +174,7 @@ If you update a blog post that was previously published:
 
 ---
 
-## 5. Converting HTML to Markdown
+## 7. Converting HTML to Markdown
 
 If you have existing content in HTML format (e.g., from an old blog or CMS) and want to convert it to Markdown for this blog, you can use the helper script.
 
@@ -160,3 +197,34 @@ Run the script from the root of the project:
 ```
 
 The script uses GitHub Flavored Markdown (GFM) format. Use `--clean` to remove any raw HTML tags that pandoc preserves by default.
+
+---
+
+## 8. Cleaning Transcript Documents
+
+If you import transcripts or documents that containing many embedded images (e.g., `data:image/svg+xml;base64,...`) or unwanted emojis, you can use the removal script to clean them up.
+
+By default, the script removes:
+- All **`data:image`** URI tags (Markdown and HTML).
+- All **emojis**.
+
+### Usage
+Run the script from the root of the project:
+
+```bash
+# Basic usage (removes data:images and emojis, creates a .bak file)
+./scripts/remove-images.py path/to/document.md
+
+# Keep emojis
+./scripts/remove-images.py path/to/document.md --keep-emojis
+
+# Remove ALL images (including external URLs and local paths)
+./scripts/remove-images.py path/to/document.md --all-images
+
+# Run without creating a backup
+./scripts/remove-images.py path/to/document.md --no-backup
+
+# Dry run (see what would be removed)
+./scripts/remove-images.py path/to/document.md --dry-run
+```
+
