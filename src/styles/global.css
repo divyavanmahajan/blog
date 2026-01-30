@@ -105,6 +105,6 @@ pre {
 
 @media (max-width: 768px) {
     .container {
-        padding: 0 1.25rem;
+        padding: 0 0.5rem; /* Significant reduction to maximize content width */
     }
 }

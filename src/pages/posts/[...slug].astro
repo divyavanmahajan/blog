@@ -33,6 +33,12 @@ const { Content, headings } = await post.render();
             </div>
         </header>
 
+        {post.data.heroImage && (
+            <div class="post-hero">
+                <img src={post.data.heroImage} alt={post.data.title} />
+            </div>
+        )}
+
         <SeriesNav currentSeries={post.data.series} currentSlug={post.slug} />
 
         <TableOfContents headings={headings} />
@@ -88,15 +94,72 @@ const { Content, headings } = await post.render();
     }
 
     /* Markdown content styles */
-    .post-content :global(h2) {
+    .post-content :global(h2),
+    .post-content :global(h3) {
         margin-top: 2rem;
-        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
     }
 
     .post-content :global(p) {
         margin-bottom: 1.5rem;
     }
+
+    .post-hero {
+        margin-bottom: 2rem;
+    }
+
+    .post-hero img {
+        width: 100%;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
     
+    @media (max-width: 768px) {
+        .post-single {
+            padding: 0.5rem; /* Drastic reduction to match container padding */
+            border: none; /* Cleaner look on small screens */
+        }
+        
+        .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-hero {
+            margin-bottom: 1rem;
+        }
+
+        .post-hero img {
+            max-height: 240px; /* Reduced as requested */
+        }
+
+        .post-content {
+            font-size: 1rem;
+        }
+
+        .post-content :global(h2),
+        .post-content :global(h3) {
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem; /* Slightly larger than body text */
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .post-content :global(p) {
+            margin-bottom: 0.75rem; /* Reduced spacing */
+        }
+
+        /* Ensure pre/code doesn't stretch */
+        .post-content :global(pre),
+        .post-content :global(code) {
+            max-width: 100%;
+            overflow-x: auto;
+            word-wrap: normal;
+        }
+    }
+
     .post-content :global(a) {
         text-decoration: underline;
     }

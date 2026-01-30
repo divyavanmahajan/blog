@@ -4,16 +4,24 @@ const { siteTitle = "Divya van Mahajan" } = Astro.props;
 
 <header class="site-header">
     <div class="header-top container">
-        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Menu">
-            <span class="hamburger"></span>
-            <span class="menu-text">Menu</span>
-        </button>
         <h1 class="site-title">
             <a href={import.meta.env.BASE_URL}>{siteTitle}</a>
         </h1>
         <p class="site-subtitle">
             Personal notebook about things I've learned.
         </p>
+    </div>
+
+    <div class="menu-bar">
+        <div class="container">
+            <button
+                id="menu-toggle"
+                class="menu-toggle"
+                aria-label="Toggle Menu"
+            >
+                <span class="menu-text">Menu</span>
+            </button>
+        </div>
     </div>
 
     <nav class="main-nav" id="main-nav">
@@ -52,6 +60,7 @@ const { siteTitle = "Divya van Mahajan" } = Astro.props;
     .site-header {
         background: var(--color-surface);
         margin-bottom: 1rem;
+        position: relative;
     }
 
     .header-top {
@@ -107,59 +116,14 @@ const { siteTitle = "Divya van Mahajan" } = Astro.props;
         border-bottom-color: var(--color-primary);
     }
 
-    .menu-toggle {
-        display: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0;
-        color: var(--color-text);
-    }
-
-    .hamburger {
-        display: block;
-        width: 20px;
-        height: 2px;
-        background: var(--color-text);
-        position: relative;
-    }
-
-    .hamburger::before,
-    .hamburger::after {
-        content: "";
-        position: absolute;
-        width: 20px;
-        height: 2px;
-        background: var(--color-text);
-        transition: transform 0.2s;
-    }
-
-    .hamburger::before {
-        top: -6px;
-    }
-
-    .hamburger::after {
-        top: 6px;
-    }
-
-    .menu-toggle.is-active .hamburger {
-        background: transparent;
-    }
-
-    .menu-toggle.is-active .hamburger::before {
-        transform: translateY(6px) rotate(45deg);
-    }
-
-    .menu-toggle.is-active .hamburger::after {
-        transform: translateY(-6px) rotate(-45deg);
-    }
-
     .menu-text {
         font-weight: 600;
         text-transform: uppercase;
         font-size: 0.9rem;
+    }
+
+    .menu-bar {
+        display: none;
     }
 
     @media (max-width: 768px) {
@@ -168,19 +132,31 @@ const { siteTitle = "Divya van Mahajan" } = Astro.props;
         }
 
         .header-top {
-            padding: 0.75rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 1rem;
+            padding: 1rem 1rem 0.5rem;
+            text-align: center;
+            display: block;
+        }
+
+        .menu-bar {
+            display: block;
+            background-color: var(--color-secondary);
+            margin-top: 0.5rem;
+            padding: 0.25rem 0;
         }
 
         .menu-toggle {
             display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            padding: 0.5rem 0;
         }
 
         .site-title {
-            font-size: 1rem; /* Matches body text size */
+            font-size: 1.5rem; /* Slightly larger for better branding */
             font-weight: 600;
         }
 
