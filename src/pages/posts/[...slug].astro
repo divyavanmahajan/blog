@@ -33,12 +33,6 @@ const { Content, headings } = await post.render();
             </div>
         </header>
 
-        {post.data.heroImage && (
-            <div class="post-hero">
-                <img src={post.data.heroImage} alt={post.data.title} />
-            </div>
-        )}
-
         <SeriesNav currentSeries={post.data.series} currentSlug={post.slug} />
 
         <TableOfContents headings={headings} />
@@ -117,46 +111,44 @@ const { Content, headings } = await post.render();
     
     @media (max-width: 768px) {
         .post-single {
-            padding: 0.5rem; /* Drastic reduction to match container padding */
-            border: none; /* Cleaner look on small screens */
+            padding: 0.25rem; /* Reduced to maximize text width reach */
+            border: none;
         }
         
         .post-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .post-hero {
-            margin-bottom: 1rem;
+            font-size: 1rem; /* Matches body text size as requested */
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase; /* Consistency with headers */
         }
 
         .post-hero img {
-            max-height: 240px; /* Reduced as requested */
+            display: none; /* Hide hero on mobile as requested */
+        }
+
+        .post-meta {
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .post-content {
             font-size: 1rem;
+            line-height: 1.6;
         }
 
+        .post-content :global(h1),
         .post-content :global(h2),
         .post-content :global(h3) {
-            margin-top: 1.25rem;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem; /* Slightly larger than body text */
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+            font-size: 1.05rem; /* Uniform size for all section headers */
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.02em;
+            font-weight: 700;
         }
 
         .post-content :global(p) {
-            margin-bottom: 0.75rem; /* Reduced spacing */
-        }
-
-        /* Ensure pre/code doesn't stretch */
-        .post-content :global(pre),
-        .post-content :global(code) {
-            max-width: 100%;
-            overflow-x: auto;
-            word-wrap: normal;
+            margin-bottom: 0.5rem; /* Compact vertical spacing */
         }
     }
 

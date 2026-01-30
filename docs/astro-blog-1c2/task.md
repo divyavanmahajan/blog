@@ -1,18 +1,17 @@
 # Task: Optimize blog layout for mobile (astro-blog-1c2)
 
-Status: Completed (Phase 2)
+Status: Completed (Phase 4)
 
 - [x] Create initial implementation plan
 - [x] Implement Initial Mobile Header/Nav improvements
 - [x] Optimize Initial Post List for mobile
 - [x] Verify initial responsiveness
-- [x] Phase 2 Refinements
-    - [x] Move menu below title in black bar (no icon)
-    - [x] Match hero image height to 2 lines in listing
-    - [x] Increase single post content width (2.5x)
-    - [x] All-caps headers in posts (slightly larger than text)
-    - [x] Reduce vertical spacing in posts
-    - [x] Scale single post hero to max 240px height
-    - [x] Fix code block width stretching
+- [x] Phase 2 & 3 Refinements
+- [x] Phase 4: Uniform Typography & Collapsibles
+    - [x] Make TOC collapsible on mobile
+    - [x] Make Series Nav collapsible on mobile
+    - [x] Hide hero images in single posts on mobile
+    - [x] Set listing thumbnails to 36px height
+    - [x] Uniform all-caps H1/H2/H3 in post content
 - [x] Final Verification
 - [x] Push changes and close issue

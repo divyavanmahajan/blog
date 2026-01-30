@@ -12,8 +12,11 @@ const tocHeadings = headings.filter((h) => h.depth <= 2);
 {
     tocHeadings.length > 0 && (
         <div class="toc">
-            <div class="toc__title">Page Content</div>
-            <nav class="toc__menu">
+            <button class="toc__toggle" id="toc-toggle">
+                <span class="toc__title">Page Content</span>
+                <span class="toc__indicator" />
+            </button>
+            <nav class="toc__menu" id="toc-menu">
                 <ul>
                     {tocHeadings.map((heading) => (
                         <li class={`toc-level-${heading.depth}`}>
@@ -26,6 +29,18 @@ const tocHeadings = headings.filter((h) => h.depth <= 2);
     )
 }
 
+<script>
+    const tocToggle = document.getElementById("toc-toggle");
+    const tocMenu = document.getElementById("toc-menu");
+
+    if (tocToggle && tocMenu) {
+        tocToggle.addEventListener("click", () => {
+            tocMenu.classList.toggle("is-open");
+            tocToggle.classList.toggle("is-active");
+        });
+    }
+</script>
+
 <style>
     .toc {
         margin: 2rem 0;
@@ -33,13 +48,35 @@ const tocHeadings = headings.filter((h) => h.depth <= 2);
     }
 
     .toc__title {
-        background-color: #2a2a2a;
         color: #fff;
         padding: 10px 15px;
         font-weight: 700;
         text-transform: uppercase;
         font-size: 0.875rem;
         letter-spacing: 0.5px;
+    }
+
+    .toc__toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background-color: #2a2a2a;
+        cursor: pointer;
+        border: none;
+        padding: 0;
+    }
+
+    .toc__indicator::after {
+        content: "▼";
+        color: #fff;
+        margin-right: 15px;
+        font-size: 10px;
+        transition: transform 0.2s;
+    }
+
+    .toc__toggle.is-active .toc__indicator::after {
+        transform: rotate(180deg);
     }
 
     .toc__menu {
@@ -95,9 +132,21 @@ const tocHeadings = headings.filter((h) => h.depth <= 2);
             margin: 1.5rem 0;
         }
 
+        .toc__menu {
+            display: none !important;
+        }
+
+        .toc__menu.is-open {
+            display: block !important;
+        }
+
         .toc__title {
             padding: 8px 12px;
             font-size: 0.8rem;
+        }
+
+        .toc__indicator::after {
+            margin-right: 12px;
         }
 
         .toc__menu a {
