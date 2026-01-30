@@ -1,7 +1,7 @@
 ---
 title: "Git stash with a message"
 description: "TIL you can add a descriptive message to git stash for easier identification later."
-pubDate: 2026-01-29
+pubDate: 2026-01-26
 tags: ["git"]
 draft: false
 ---

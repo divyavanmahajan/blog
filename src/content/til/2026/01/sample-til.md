@@ -1,7 +1,7 @@
 ---
 title: "Sample TIL - Getting Started"
 description: "This is a sample TIL entry to test the feature implementation."
-pubDate: 2026-01-30
+pubDate: 2026-01-24
 tags: ["astro", "testing"]
 draft: false
 ---
@@ -17,7 +17,7 @@ This is a sample TIL (Today I Learned) entry. TIL posts are shorter notes about 
 
 ## Example
 
-Here's how you might share a quick code tip:
+Here's how to share a quick code tip:
 
 ```javascript
 // TIL: You can use ?? instead of || for nullish coalescing
