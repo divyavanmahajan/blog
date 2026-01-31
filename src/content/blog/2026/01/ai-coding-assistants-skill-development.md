@@ -9,7 +9,7 @@ heroImage: "/images/ai-learning-feedback-loop.png"
 linkedin: true
 linkedInMessage: "Anthropic's study found that AI assistance hinders skill development for developers learning new technologies."
 linkedInUrl: "https://www.linkedin.com/pulse/hidden-cost-ai-coding-assistants-what-anthropics-divya-van-mahajan-zgone"
-series: "ai_coding-002"
+series: "ai_agents-002"
 ---
 
 As someone who uses AI coding assistants daily, I was struck by [Anthropic's recent research](https://www.anthropic.com/research/AI-assistance-coding-skills) on how AI assistance impacts skill development. The findings challenge the assumption that AI makes us better programmers.

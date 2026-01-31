@@ -5,7 +5,7 @@ import { marked } from 'marked';
 
 const BLOG_CONTENT_DIR = path.resolve('src/content/blog');
 const LINKEDIN_OUTPUT_DIR = path.resolve('linkedin');
-const SITE_URL = 'https://divyavanmahajan.github.io';
+const SITE_URL = 'https://vanmahajan.de';
 
 // Ensure output directory exists
 if (!fs.existsSync(LINKEDIN_OUTPUT_DIR)) {
