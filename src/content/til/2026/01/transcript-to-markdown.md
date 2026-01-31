@@ -14,9 +14,11 @@ Firefly transcripts come as HTML files packed with inline `data:image` tags (pro
 
 ## The Solution: Two Scripts
 
+[convert_html.py](https://github.com/divyavanmahajan/astro-blog/blob/main/scripts/convert_html.py) and [remove-images.py](https://github.com/divyavanmahajan/astro-blog/blob/main/scripts/remove-images.py)
+
 ### Step 1: HTML to Markdown with Pandoc
 
-Use the `convert_html.py` script which wraps Pandoc for clean conversion:
+Use the [convert_html.py](https://github.com/divyavanmahajan/astro-blog/blob/main/scripts/convert_html.py) script which wraps Pandoc for clean conversion:
 
 ```bash
 # Basic conversion
@@ -32,7 +34,7 @@ The `--clean` flag uses Pandoc's `-t gfm-raw_html` option, which outputs GitHub 
 
 ### Step 2: Remove Embedded Images and Emojis
 
-The converted markdown may still contain embedded `data:image` URIs and emoji characters. Clean these with `remove-images.py`:
+The converted markdown may still contain embedded `data:image` URIs and emoji characters. Clean these with [remove-images.py](https://github.com/divyavanmahajan/astro-blog/blob/main/scripts/remove-images.py):
 
 ```bash
 # Remove data:image tags and emojis (default)
