@@ -6,6 +6,7 @@ author: "Divya van Mahajan"
 categories: ["Coding"]
 tags: ["antigravity", "astro", "architecture","genai"]
 heroImage: "/images/building-with-antigravity-hero.png"
+series: "ai_coding-001"
 linkedin: true
 linkedinMessage: "Building a markdown blog with Astro and Antigravity from spec to deployment."
 linkedinArticleUrl: "https://www.linkedin.com/pulse/building-blog-antigravity-divya-van-mahajan-vkpfe/"

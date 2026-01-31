@@ -7,6 +7,7 @@ categories: ["Coding"]
 tags: ["ai", "learning", "research", "productivity"]
 heroImage: "/images/ai-learning-feedback-loop.png"
 linkedin: false
+series: "ai_coding-002"
 ---
 
 As someone who uses AI coding assistants daily, I was struck by [Anthropic's recent research](https://www.anthropic.com/research/AI-assistance-coding-skills) on how AI assistance impacts skill development. The findings challenge the assumption that AI makes us better programmers.

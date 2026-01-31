@@ -117,8 +117,9 @@ const { Content, headings } = await post.render();
     
     @media (max-width: 768px) {
         .post-single {
-            padding: 0.25rem; /* Reduced to maximize text width reach */
+            padding: 1rem 0; /* Vertical padding only, horiz comes from container */
             border: none;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
         
         .post-title {
@@ -129,7 +130,8 @@ const { Content, headings } = await post.render();
         }
 
         .post-hero img {
-            display: none; /* Hide hero on mobile as requested */
+            max-height: 240px; /* Show hero on mobile with limited height */
+            object-fit: cover;
         }
 
         .post-meta {
@@ -155,6 +157,16 @@ const { Content, headings } = await post.render();
 
         .post-content :global(p) {
             margin-bottom: 0.5rem; /* Compact vertical spacing */
+        }
+
+        /* Prevent code blocks from causing horizontal overflow */
+        .post-content :global(pre),
+        .post-content :global(code),
+        .post-content :global(.astro-code) {
+            max-width: 100%;
+            overflow-x: auto;
+            margin-left: 0;
+            margin-right: 0;
         }
     }
 
