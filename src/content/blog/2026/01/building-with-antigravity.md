@@ -132,6 +132,12 @@ For a small blog with a limited number of posts, client-side search is perfect:
 
 If the blog grows significantly, we could upgrade to a more robust solution like Pagefind, but for now, this lightweight approach works great.
 
+## Research and Continuous Learning
+
+As I continue to build and refine this blog, I'm constantly looking at how others are using modern tools to solve similar problems. Recently, I came across an article about [porting applications to Cloudflare Workers](https://news.lavx.hu/article/you-can-just-port-things-to-cloudflare-workers) using an AI-assisted "vibeporting" approach. 
+
+This mirrors my experience with Antigravity: the ability to move existing server-side logic (like Python or Rails) to the edge by leveraging AI to handle the bulk of the re-architecting work. I've summarized my takeaways from this in a [Today I Learned (TIL) post](/til/2026/02/vibeporting-to-cloudflare-workers).
+
 ## Conclusion
 
 Building this blog with Antigravity was an interesting exercise. On one hand Antigravity is rapidly able to create 90% of the code and site, but it struggled trying to correct the CSS styling. If it was a person, I would be scratching my head, wondering how such a smart programmer struggled with simple problems but did great at complex problems. Switching the models gets you a different programming persona, so mixing them up is a good idea. Cursor does a better job at not getting stuck. I had to step in an hint or increase to a thinking model to get Antigravity to move along. 
