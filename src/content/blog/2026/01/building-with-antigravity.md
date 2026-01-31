@@ -9,7 +9,7 @@ heroImage: "/images/building-with-antigravity-hero.png"
 series: "ai_coding-001"
 linkedin: true
 linkedinMessage: "Building a markdown blog with Astro and Antigravity from spec to deployment."
-linkedinArticleUrl: "https://www.linkedin.com/pulse/building-blog-antigravity-divya-van-mahajan-vkpfe/"
+linkedinUrl: "https://www.linkedin.com/pulse/building-blog-antigravity-divya-van-mahajan-vkpfe/"
 ---
 
 I am passionate about building things and learning new things. I was inspired by [Rost Glukhov](https://glukhov.org) and [Simon Willison](https://simonwillison.net), to record and share what I've learnt. I set myself a goal to create a blog infrastructure that was low maintenance and easy to use.

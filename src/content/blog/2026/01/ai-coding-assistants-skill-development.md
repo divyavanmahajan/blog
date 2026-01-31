@@ -6,7 +6,9 @@ author: "Divya van Mahajan"
 categories: ["Coding"]
 tags: ["ai", "learning", "research", "productivity"]
 heroImage: "/images/ai-learning-feedback-loop.png"
-linkedin: false
+linkedin: true
+linkedInMessage: "Anthropic's study found that AI assistance hinders skill development for developers learning new technologies."
+linkedInUrl: "https://www.linkedin.com/pulse/hidden-cost-ai-coding-assistants-what-anthropics-divya-van-mahajan-zgone"
 series: "ai_coding-002"
 ---
 
