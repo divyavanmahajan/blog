@@ -4,21 +4,36 @@ import matter from 'gray-matter';
 import { marked } from 'marked';
 
 const BLOG_CONTENT_DIR = path.resolve('src/content/blog');
+const TIL_CONTENT_DIR = path.resolve('src/content/til');
 const LINKEDIN_OUTPUT_DIR = path.resolve('linkedin');
 const SITE_URL = 'https://vanmahajan.de';
+const TIL_SITE_URL = 'https://www.wanmahajan.de';
 
-// Ensure output directory exists
-if (!fs.existsSync(LINKEDIN_OUTPUT_DIR)) {
-    fs.mkdirSync(LINKEDIN_OUTPUT_DIR, { recursive: true });
-}
+// Parse CLI arguments
+const args = process.argv.slice(2);
+const periodArg = args.find(arg => arg.startsWith('--period='));
+const period = periodArg ? periodArg.split('=')[1] : 'month'; // 'month' or 'week'
+
+// Ensure output directories exist
+[
+    LINKEDIN_OUTPUT_DIR,
+    path.join(LINKEDIN_OUTPUT_DIR, 'til', 'monthly'),
+    path.join(LINKEDIN_OUTPUT_DIR, 'til', 'week')
+].forEach(dir => {
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
+});
 
 async function generateLinkedInContent() {
     console.log('🚀 Starting LinkedIn content generation...');
+    console.log(`📅 TIL Period: ${period}`);
 
-    const posts = getAllPosts(BLOG_CONTENT_DIR);
-    let generatedCount = 0;
+    // 1. Process Blog Posts
+    const blogPosts = getAllPosts(BLOG_CONTENT_DIR);
+    let blogCount = 0;
 
-    for (const postPath of posts) {
+    for (const postPath of blogPosts) {
         const relativePath = path.relative(BLOG_CONTENT_DIR, postPath);
         const slug = relativePath.replace(/\.md$/, '');
         const fileContent = fs.readFileSync(postPath, 'utf-8');
@@ -28,40 +43,61 @@ async function generateLinkedInContent() {
             continue;
         }
 
-        console.log(`\n📄 Processing: ${relativePath}`);
+        console.log(`📄 Processing Blog: ${relativePath}`);
         const outputDir = path.join(LINKEDIN_OUTPUT_DIR, slug);
         if (!fs.existsSync(outputDir)) {
             fs.mkdirSync(outputDir, { recursive: true });
         }
 
-        // 1. Transform URLs to absolute
         const absoluteMarkdown = transformUrls(markdown, slug);
-
-        // 2. Generate HTML Article
         const htmlArticle = generateHtmlArticle(frontmatter, absoluteMarkdown, slug);
         fs.writeFileSync(path.join(outputDir, 'article.html'), htmlArticle);
 
-        // 3. Generate Rich Text Article (stripped of most HTML)
         const richTextArticle = generateRichTextArticle(frontmatter, absoluteMarkdown);
         fs.writeFileSync(path.join(outputDir, 'article.txt'), richTextArticle);
 
-        // 4. Generate LinkedIn Post
         const postText = generatePostText(frontmatter, slug);
         fs.writeFileSync(path.join(outputDir, 'post.txt'), postText);
 
-        // 5. Generate Update Summary if applicable
         if (frontmatter.linkedinArticleUrl) {
             const updateSummary = generateUpdateSummary(frontmatter, absoluteMarkdown);
             fs.writeFileSync(path.join(outputDir, 'update-summary.txt'), updateSummary);
         }
 
-        generatedCount++;
+        blogCount++;
     }
 
-    console.log(`\n✅ Finished! Generated LinkedIn content for ${generatedCount} posts.`);
+    // 2. Process TIL Posts and generate summaries
+    const tilPosts = getAllPosts(TIL_CONTENT_DIR);
+    const groupedTILs = groupTILs(tilPosts, period);
+    let tilSummaryCount = 0;
+
+    for (const [key, tils] of Object.entries(groupedTILs)) {
+        const summaryText = generateTILSummary(key, tils, period);
+        let fileName;
+        let subDir;
+
+        if (period === 'month') {
+            fileName = `post-${key}.txt`;
+            subDir = 'monthly';
+        } else {
+            fileName = `post-${key}.txt`;
+            subDir = 'week';
+        }
+
+        const outputPath = path.join(LINKEDIN_OUTPUT_DIR, 'til', subDir, fileName);
+        fs.writeFileSync(outputPath, summaryText);
+        tilSummaryCount++;
+        console.log(`📝 Generated TIL Summary: til/${subDir}/${fileName}`);
+    }
+
+    console.log(`\n✅ Finished!`);
+    console.log(`- Blog posts processed: ${blogCount}`);
+    console.log(`- TIL summaries generated: ${tilSummaryCount}`);
 }
 
 function getAllPosts(dirPath, arrayOfFiles = []) {
+    if (!fs.existsSync(dirPath)) return arrayOfFiles;
     const files = fs.readdirSync(dirPath);
 
     files.forEach(file => {
@@ -74,6 +110,76 @@ function getAllPosts(dirPath, arrayOfFiles = []) {
     });
 
     return arrayOfFiles;
+}
+
+function groupTILs(tilPaths, period) {
+    const groups = {};
+
+    tilPaths.forEach(tilPath => {
+        const fileContent = fs.readFileSync(tilPath, 'utf-8');
+        const { data: frontmatter } = matter(fileContent);
+        if (!frontmatter.pubDate) return;
+
+        const date = new Date(frontmatter.pubDate);
+        let key;
+
+        if (period === 'month') {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            key = `${year}-${month}`;
+        } else {
+            // Week starting Monday
+            const d = new Date(date);
+            const day = d.getDay(); // 0 is Sunday, 1 is Monday...
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            const monday = new Date(d.setDate(diff));
+            const year = monday.getFullYear();
+            const month = String(monday.getMonth() + 1).padStart(2, '0');
+            const dayNum = String(monday.getDate()).padStart(2, '0');
+            key = `${year}-${month}-${dayNum}`;
+        }
+
+        if (!groups[key]) groups[key] = [];
+
+        // Get relative path for slug
+        const relativePath = path.relative(TIL_CONTENT_DIR, tilPath);
+        const slug = relativePath.replace(/\.md$/, '');
+
+        groups[key].push({
+            title: frontmatter.title,
+            description: frontmatter.description,
+            date: frontmatter.pubDate,
+            url: `${TIL_SITE_URL}/til/${slug}`
+        });
+    });
+
+    // Sort tils in each group by date
+    for (const key in groups) {
+        groups[key].sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    return groups;
+}
+
+function generateTILSummary(key, tils, period) {
+    let intro;
+    if (period === 'month') {
+        const [year, month] = key.split('-');
+        const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long' });
+        intro = `Here's a summary of what I learned in ${monthName} ${year}:`;
+    } else {
+        intro = `Here's a summary of what I learned during the week of ${key}:`;
+    }
+
+    let summary = `Today I Learned: ${intro}\n\n`;
+
+    tils.forEach(til => {
+        const desc = til.description || "";
+        const oneSentence = desc.split('.')[0] + (desc.includes('.') ? '.' : '');
+        summary += `🚀 ${til.title}\n${oneSentence}\nRead more: ${til.url}\n\n`;
+    });
+
+    return summary.trim();
 }
 
 function transformUrls(markdown, slug) {
@@ -118,14 +224,10 @@ function generateHtmlArticle(frontmatter, markdown, slug) {
 }
 
 function generateRichTextArticle(frontmatter, markdown) {
-    // For LinkedIn's visual editor, we want something fairly clean but with some formatting
     let text = `# ${frontmatter.title}\n\n`;
     text += `Originally published at ${SITE_URL}\n\n`;
     text += `---\n\n`;
     text += markdown;
-
-    // In a real scenario, we might want to convert markdown to a semi-rich format 
-    // but for article.txt we'll provide the clean markdown which LinkedIn often handles well
     return text;
 }
 
