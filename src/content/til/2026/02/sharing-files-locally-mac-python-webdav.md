@@ -6,7 +6,7 @@ tags: ["macos", "terminal", "python", "networking", "apache", "webdav"]
 draft: false
 ---
 
-Today I needed to share a directory of files that were about 2GB but had no USB stick to transfer them. As both of us were on the same local network, it was time for a quick hack and setup a webserver/webdav to share the files. Here are **copy-paste one-liners** that work on macOS. The first two share the current directory and the Apache option shares /Library/WebServer/WebDAV. 
+Today I needed to share a directory of files that were about 2GB but had no USB stick to transfer them. As both of us were on the same local network, it was time for a quick hack and setup a webserver/webdav to share the files. Here are **copy-paste one-liners** that work on macOS. The first two share the current directory and the Apache option shares /Library/WebServer/WebDAV. The consolidated scripts were cleaned up with ChatGPT.
 
 
 ## Quick comparison
@@ -19,7 +19,8 @@ Today I needed to share a directory of files that were about 2GB but had no USB 
 
 ---
 
-# Simple HTTP share (Python stdlib, without authentication)
+# Simple HTTP share 
+This uses Python's stdlib and does not support any authentication.
 
 ```sh
 python3 -m http.server 18080
@@ -32,7 +33,7 @@ This will start a http server on port 18080 and share the contents of the curren
 
 # WSGIDAV — best option
 
-Requires an installation of wsgidev in Python. macOS blocks `pip install` into system Python, so you have **two sane options**. 
+Requires an installation of wsgidev in Python. macOS blocks `pip install` into system Python, so you have **two sane options**. Note: please change `user` / `pass` as needed!
 
 **Temp install - Throwaway one time**
 
@@ -44,19 +45,16 @@ python3 -m venv /tmp/wsgidav.$$ && source /tmp/wsgidav.$$/bin/activate && pip in
 ```
 
 **Permanent install - WSGIDAV in a venv**
+
+
 ```sh
 python3 -m venv ~/wsgidav-venv
 source ~/wsgidav-venv/bin/activate
 pip install wsgidav cheroot lxml
-```
-
-**Create a minimal WSGIDAV config file**
-
-```sh
 cat > ~/wsgidav.conf <<'EOF'
 {
   "host": "0.0.0.0",
-  "port": 8080,
+  "port": 18080,
   "provider_mapping": {
     "/": {
       "root": ".",
@@ -80,13 +78,7 @@ cat > ~/wsgidav.conf <<'EOF'
 EOF
 ```
 
-**Change `user` / `pass` as needed**
 
-**Read-only share - add to config**
-
-```json
-"readonly": true
-```
 
 ## Start WSGIDAV
 
@@ -174,7 +166,7 @@ echo "Restarting Apache..."
 sudo apachectl restart
 
 echo
-echo "✅ WebDAV ready:"
+echo " WebDAV ready:"
 echo "   http://localhost/WebDAV/"
 ```
 
