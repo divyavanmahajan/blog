@@ -92,3 +92,9 @@ draft: false
 - **Index**: `/til/` with tag cloud and recent entries
 - **RSS**: `/til/rss.xml` for feed readers
 
+### Styling & Font Toggle
+TIL entries feature a **Font Toggle** that allows readers to switch between the standard site font (Inter) and a technical monospaced font (**IBM Plex Mono**).
+- **Default**: TIL pages default to **Mono** if no user preference is set.
+- **Scope**: The toggle only affects TIL content (articles, lists, notes) to preserve the blog's branding in the header and navigation.
+- **Persistence**: User preference is saved in `localStorage`.
+

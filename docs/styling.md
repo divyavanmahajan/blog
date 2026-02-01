@@ -2,9 +2,9 @@
 
 This document outlines the design decisions, CSS variables, and layout systems used in the blog. The styling is primarily handled by vanilla CSS in `src/styles/global.css` and scoped component styles.
 
-## 1. Typography
+### 1. Typography
 
-We use a three-tier typography system with distinct fonts for the site title, headings, and body text.
+We use a four-tier typography system with distinct fonts for the site title, headings, body text, and technical/TIL content.
 
 -   **Site Title**: Times New Roman (serif)
     -   Weight: `500` (Medium)
@@ -18,6 +18,10 @@ We use a three-tier typography system with distinct fonts for the site title, he
     -   Weight: `400` (Regular)
     -   Usage: Standard text, metadata, navigation.
     -   Purpose: Highly legible UI font optimized for screens.
+-   **Technical (TIL)**: [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono)
+    -   Weight: `400` (Regular)
+    -   Usage: TIL content (when toggled), code blocks.
+    -   Purpose: Distinct, professional monospaced font for technical notes.
 
 ### CSS configuration
 ```css
@@ -25,6 +29,7 @@ We use a three-tier typography system with distinct fonts for the site title, he
     --font-title: 'Times New Roman', serif;
     --font-header: 'Open Sans', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
     --weight-title: 500;
     --weight-header: 800;
     --weight-body: 400;
@@ -59,7 +64,22 @@ The main layout utilizes CSS Grid with a responsive sidebar strategy.
 -   **Max Width**: `1200px` (`--max-width`).
 -   **Box Sizing**: Globally set to `border-box` to ensure padding doesn't affect width calculations.
 
-## 4. Mobile Responsiveness
+## 4. Font Toggle (TIL Section)
+
+The TIL section includes a font switcher to toggle between `Sans` (Inter) and `Mono` (IBM Plex Mono).
+
+### Implementation Details
+- **Toggle State**: Managed via a `.use-mono-font` class on the `<html>` element.
+- **Persistence**: Saved in `localStorage` as `til-font-preference`.
+- **Default Behavior**: Defaults to `Mono` for the TIL section if no preference is stored.
+- **Scoping**:
+    - **Mono Applied to**: `.content`, articles, headings within content, lists, and paragraphs.
+    - **Excluded**: Site header (`.site-header`), main navigation (`.main-nav`), and site title (`.site-title`). These maintain their original fonts to preserve branding.
+
+### CSS Overrides
+When active, the `.use-mono-font` class uses `!important` to override internal component styles and ensure a consistent monospaced experience across various content structures.
+
+## 5. Mobile Responsiveness
 
 Specific adaptations are made for smaller screens (< 768px):
 

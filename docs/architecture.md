@@ -23,6 +23,7 @@ This project is a static site generated using **[Astro](https://astro.build/)**.
 │   │   ├── Search.astro        # Client-side search component
 │   │   ├── TableOfContents.astro # Post navigation TOC
 │   │   ├── SeriesNav.astro     # Series navigation for multi-part posts
+│   │   ├── FontToggle.astro    # Toggle between Sans and Mono fonts
 │   │   └── ProfileImage.astro  # Circular profile image
 │   ├── content/        # Markdown content source
 │   │   ├── blog/       # Blog posts (organized by YYYY/MM/)
@@ -134,6 +135,7 @@ The TIL section is designed for quick, bite-sized learnings that don't warrant a
 - Dedicated RSS feed (`til/rss.xml`).
 - Tag-based discovery sidebar with post counts.
 - Standardized styling that matches the blog's mobile typography.
+- **Font Switching**: Integrated `FontToggle` component using `localStorage` for persistence and `!important` CSS overrides for the `IBM Plex Mono` font.
 
 ## 9. Mobile-First Layout
 
