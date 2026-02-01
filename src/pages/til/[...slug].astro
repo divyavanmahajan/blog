@@ -26,11 +26,11 @@ import FontToggle from "../../components/FontToggle.astro";
 >
     <article class="til-post">
         <header class="til-post-header">
-            <div class="header-top">
-                <h1>{til.data.title}</h1>
-            </div>
             <div class="header-controls">
                 <FontToggle />
+            </div>
+            <div class="header-top">
+                <h1>{til.data.title}</h1>
             </div>
             <div class="til-meta">
                 <time datetime={displayDate.toISOString()}>
