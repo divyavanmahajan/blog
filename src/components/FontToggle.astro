@@ -14,21 +14,17 @@
     const button = document.getElementById("font-toggle");
     const target = document.documentElement;
 
-    // Initialize button state (class already set on documentElement by BaseLayout)
+    // Initialize button state
     const preference = localStorage.getItem(STORAGE_KEY);
-    if (preference === "mono") {
-        target.classList.add(MONO_CLASS);
+    const isTilSection = window.location.pathname.includes("/til/");
+    const shouldBeMono = preference === "mono" || (!preference && isTilSection);
+
+    if (shouldBeMono) {
         button?.classList.add("is-mono");
     }
 
     button?.addEventListener("click", () => {
         const isMono = target.classList.toggle(MONO_CLASS);
-        console.log(
-            "Font Toggle: isMono =",
-            isMono,
-            "Classes on HTML:",
-            target.className,
-        );
         button.classList.toggle("is-mono", isMono);
         localStorage.setItem(STORAGE_KEY, isMono ? "mono" : "sans");
     });

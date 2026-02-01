@@ -33,13 +33,18 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<script is:inline>
-			const preference = localStorage.getItem("til-font-preference");
-			if (
-				preference === "mono" &&
-				window.location.pathname.includes("/til/")
-			) {
-				document.documentElement.classList.add("use-mono-font");
-			}
+			(function () {
+				const preference = localStorage.getItem("til-font-preference");
+				const isTilSection = window.location.pathname.includes("/til/");
+
+				// Default to mono for TIL section if no preference set
+				const activeMono =
+					preference === "mono" || (!preference && isTilSection);
+
+				if (activeMono && isTilSection) {
+					document.documentElement.classList.add("use-mono-font");
+				}
+			})();
 		</script>
 	</head>
 	<body>

@@ -34,15 +34,35 @@
     --tracking-body: 0 !important;
 }
 
-.use-mono-font,
-.use-mono-font body,
+/* Force mono on content elements while excluding header/nav */
 .use-mono-font .content,
-.use-mono-font h1,
-.use-mono-font h2,
-.use-mono-font h3,
-.use-mono-font article,
-.use-mono-font p {
+.use-mono-font .content h1,
+.use-mono-font .content h2,
+.use-mono-font .content h3,
+.use-mono-font .content article,
+.use-mono-font .content p,
+.use-mono-font .content li,
+.use-mono-font .content span:not(.rss-icon span),
+.use-mono-font .content a:not(.tag-badge):not(.tag-link):not(.tag-inline) {
     font-family: var(--font-mono) !important;
+}
+
+/* Ensure site header and nav maintain their original fonts */
+.use-mono-font .site-header,
+.use-mono-font .site-header *,
+.use-mono-font .main-nav,
+.use-mono-font .main-nav * {
+    font-family: inherit !important;
+}
+
+/* Explicitly restore site title font */
+.use-mono-font .site-title a {
+    font-family: var(--font-title) !important;
+}
+
+/* Explicitly restore menu font */
+.use-mono-font .menu li a {
+    font-family: var(--font-header) !important;
 }
 
 html {
