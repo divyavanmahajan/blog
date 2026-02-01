@@ -8,9 +8,6 @@ tags: ["typescript", "github", "ai-agents", "open-source", "mcp"]
 heroImage: "/images/github_trending_typescript_jan2026.png"
 draft: false
 ---
-
-![Jan 2026 Top TypeScript Repos](/images/github_trending_typescript_jan2026.png)
-
 The Jan 2026 top TypeScript repos on GitHub are a strong signal for where the ecosystem is heading. [https://github.com/trending/typescript?since=monthly](https://github.com/trending/typescript?since=monthly)
 
 ---
