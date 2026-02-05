@@ -15,10 +15,7 @@ Fireflies doesn't always provide a direct clean Markdown export. The most reliab
 
 1. **Open the transcript**: Navigate to the specific meeting in your Fireflies dashboard.
 2. **Load all content**: Scroll through the entire transcript to ensure lazy-loading elements are rendered.
-3. **Save as HTML**: 
-   - Press `Cmd + S` (macOS) or `Ctrl + S`.
-   - Choose **"Webpage, HTML Only"** (important: don't save the "Complete" webpage with assets).
-   - Save it to your project folder (e.g., `my-meeting.html`).
+3. Right click to inspect an element, select the html element and then click on "Copy outer html". Open a text editor and save the content as an html file.
 
 ## 2. Process with Automation
 I use a master Python script that chains three specialized tools:
