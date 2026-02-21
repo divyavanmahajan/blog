@@ -34,7 +34,7 @@ Since the macOS GUI was hanging, I booted into the **Recovery Console** (holding
 The command I used was:
 
 ```bash
-rsync -a -E -H -P /Volumes/Macintosh\ HD\ -\ Data /Volumes/iMacData/Users
+rsync -a -E -H -P -c /Volumes/Macintosh\ HD\ -\ Data /Volumes/iMacData/Users
 ```
 
 ### Understanding the rsync Flags
@@ -42,13 +42,22 @@ rsync -a -E -H -P /Volumes/Macintosh\ HD\ -\ Data /Volumes/iMacData/Users
 If you are performing a similar recovery, it’s crucial to understand these flags:
 
 *   `-a` (Archive): This is a "combo" flag that preserves permissions, ownership, timestamps, and symbolic links.
+*   `-c` (Checksum): Skips files based on checksum, not mod-time & size. This is essential when recovering from a disk with filesystem errors where modification times might not be reliable.
 *   `-E` (Extended Attributes): This is specific to macOS. It ensures that metadata, resource forks, and Finder-specific data are preserved.
 *   `-H` (Hard Links): Preserves hard links so that files pointing to the same data don't get duplicated.
 *   `-P` (Partial/Progress): This shows a progress bar for each file and allows you to resume the transfer if the connection is interrupted.
 
 ### Performance Notes
 
-During the process, I experimented with `--min-size` and `--max-size` filters to try and prioritize smaller or larger files to speed up the transfer. However, I found that **running a single, standard rsync** was actually faster and more reliable. For a roughly 1TB internal drive, the transfer took about **8 hours** to complete securely.
+During the process, I experimented with `--min-size` and `--max-size` filters to try and prioritize smaller or larger files to speed up the transfer. 
+
+One optimization that worked well was separating the transfer of large files. For example, to transfer only files larger than 5MB:
+
+```bash
+rsync -a -E -H -P -c --min-size=5M /Volumes/Macintosh\ HD\ -\ Data /Volumes/iMacData/Users
+```
+
+I found that **transferring large files first went a lot faster** than the small files, which incur significant overhead. After the large files were done, I ran a single, standard rsync to catch everything else. For a roughly 1TB internal drive, the total transfer took about **8 hours** to complete securely.
 
 ## Reinstalling macOS Monterey
 
