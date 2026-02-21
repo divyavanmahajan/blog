@@ -72,8 +72,9 @@ rsync ... --exclude='Library/Containers' --exclude='Library/Mobile Documents' ..
 Once the backup was verified, I proceeded to the final steps:
 
 1.  **Reinstall macOS**: In the Recovery Console, I selected "Reinstall macOS Monterey" and chose the external **iMac** volume I created earlier.
-2.  **Migration Assistant**: After the installation finished and the system rebooted into the new drive, I opened Migration Assistant. Use the option **"From a Mac, Time Machine backup, or startup disk"**.
-3.  **Point to the Backup**: I selected the old internal drive (or the backup volume) as the source. 
+2.  **Select the Boot Drive**: To boot from the new external SSD, restart the iMac and immediately **press and hold the Option (⌥) key**. This brings up the Startup Manager, where you can select the new "iMac" volume on the Sandisk SSD.
+3.  **Migration Assistant**: After the system rebooted into the new drive, I opened Migration Assistant. Use the option **"From a Mac, Time Machine backup, or startup disk"**.
+4.  **Point to the Backup**: I selected the old internal drive (or the backup volume) as the source. 
 
 ## Conclusion
 
