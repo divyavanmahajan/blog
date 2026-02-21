@@ -49,11 +49,29 @@ Instead of reading the SQLite database, **PhotoScript** acts as a Python wrapper
 - **Library Management**: Select photos in the UI, toggle the "Favorite" status, or move items between albums programmatically.
 - **Workflow Integration**: Excellent for "bridge" scripts that need to take output from another app and push it directly into the Photos interface.
 
-### The Key Difference:
-- Use **osxphotos** for high-speed querying, data extraction, and complex exports (read-only or database-direct).
 - Use **PhotoScript** for automation that requires the Photos app to perform actions or when you need to modify the library from within the app environment.
+
+## Scripting with JavaScript (JXA)
+If you prefer JavaScript over Python or AppleScript, you can use **JavaScript for Automation (JXA)**. As documented in Paul Mudge's guide [Scripting Photos for macOS with JavaScript](https://mudge.name/2019/11/13/scripting-photos-for-macos-with-javascript/), this allows you to automate Photos using modern JS syntax.
+
+### Key Concepts:
+- **Environment**: Use the built-in **Script Editor** (set language to JavaScript) or run via terminal with `osascript -il JavaScript`.
+- **Selection**: Interact with what you've currently clicked on using `Photos.selection()`.
+- **Reading vs. Writing**: 
+    - **Read**: Call properties as functions, e.g., `item.date()` or `item.filename()`.
+    - **Write**: Assign values directly, e.g., `item.date = new Date(2023, 0, 1);`.
+- **iCloud Sync**: One of the biggest advantages of using JXA (or AppleScript/PhotoScript) over direct database editing is that changes are officially registered by the Photos app and **correctly propagate to iCloud Photos**.
+
+```javascript
+// Example: Print filenames of selected photos
+const Photos = Application("Photos");
+for (const photo of Photos.selection()) {
+  console.log(photo.filename());
+}
+```
 
 ## Why Use These Tools?
 - **Data Portability**: Easily move your photos to another service while keeping all your albums and metadata intact.
 - **Digital Preservation**: Ensure your metadata is embedded in the image files themselves, rather than trapped in a proprietary database.
 - **Automation**: Build workflows to auto-export or process new photos as they are added to your library.
+- **Cloud Integrity**: Using official APIs (JXA, PhotoScript) ensures your edits sync to all your devices via iCloud.
