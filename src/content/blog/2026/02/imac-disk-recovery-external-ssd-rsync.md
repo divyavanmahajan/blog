@@ -13,6 +13,8 @@ Failing hardware is never a pleasant experience, especially when it's the intern
 
 Recently, I faced a situation where filesystem errors were causing the system to hang indefinitely. Here is the step-by-step process I used to recover the data and get the system back up and running using an external SSD.
 
+![Recovering from iMac Disk Errors](/images/imac-recovery-hero.png)
+
 ## The Solution: External SSD Boot Drive
 
 Instead of opening the iMac (a notoriously difficult task involving adhesive strips and delicate cables), the most efficient solution is to boot from a fast external drive. I used a **2TB Sandisk Extreme SSD** for this purpose.
