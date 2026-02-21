@@ -69,6 +69,16 @@ for (const photo of Photos.selection()) {
   console.log(photo.filename());
 }
 ```
+## Understanding the Database Structure
+For those who want to look under the hood, the Photos library uses a SQLite database that follows Apple's **Core Data** conventions. Further details can be found in the [osxphotos wiki](https://github.com/RhetTbull/osxphotos/wiki/Understanding-the-Photos-database).
+
+### Essential Database Facts:
+- **File Locations**: 
+  - Since Photos 5.0 (macOS Catalina), the primary metadata is in `~/Pictures/Photos Library.photoslibrary/database/Photos.sqlite`.
+  - An auxiliary file, `photos.db`, contains high-level library metadata like the schema version.
+- **Table Naming**: Most tables and columns have a `Z` prefix (e.g., `ZASSET`, `ZGENERICASSET`), a hallmark of Core Data's SQLite backing store.
+- **Dates & Epochs**: Photos stores timestamps as a **Mac OS time value** (Cocoa epoch), which is the number of seconds since **January 1, 2001**. To convert this to Unix time (seconds since 1970), you need to add exactly `978307200` seconds.
+- **Resource Mapping**: The `ZINTERNALRESOURCE` table tracks the relationship between an asset and its physical files (Originals, Edited versions, and Thumbnails).
 
 ## Why Use These Tools?
 - **Data Portability**: Easily move your photos to another service while keeping all your albums and metadata intact.
