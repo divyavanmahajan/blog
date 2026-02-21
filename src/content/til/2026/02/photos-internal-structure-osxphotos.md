@@ -41,7 +41,19 @@ for photo in photosdb.photos(keywords=["Vacation"]):
     print(f"Found: {photo.filename}, Original Name: {photo.original_filename}")
 ```
 
-## Why Use It?
+## Adding PhotoScript for App Interaction
+While `osxphotos` is excellent for querying the database directly (especially when Photos.app is closed), its sister project [PhotoScript](https://rhettbull.github.io/PhotoScript/) offers a different approach.
+
+Instead of reading the SQLite database, **PhotoScript** acts as a Python wrapper around the Apple Photos **AppleScript** interface. This enables direct interaction with a *running* instance of Photos:
+- **Automation**: Create albums, import photos, and modify metadata (titles, descriptions, keywords) in real-time.
+- **Library Management**: Select photos in the UI, toggle the "Favorite" status, or move items between albums programmatically.
+- **Workflow Integration**: Excellent for "bridge" scripts that need to take output from another app and push it directly into the Photos interface.
+
+### The Key Difference:
+- Use **osxphotos** for high-speed querying, data extraction, and complex exports (read-only or database-direct).
+- Use **PhotoScript** for automation that requires the Photos app to perform actions or when you need to modify the library from within the app environment.
+
+## Why Use These Tools?
 - **Data Portability**: Easily move your photos to another service while keeping all your albums and metadata intact.
 - **Digital Preservation**: Ensure your metadata is embedded in the image files themselves, rather than trapped in a proprietary database.
 - **Automation**: Build workflows to auto-export or process new photos as they are added to your library.
