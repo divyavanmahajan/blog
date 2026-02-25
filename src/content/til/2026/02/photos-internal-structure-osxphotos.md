@@ -1,9 +1,10 @@
 ---
 title: "TIL: Power-User Access to Apple Photos with osxphotos"
-description: "A summary of how the osxphotos tool provides a CLI and API to query and export metadata from the Apple Photos library."
+description: "Managing your Mac photos library. OSXPhotos, Power Photos, and Phoenix Slides are great tools for this."
 pubDate: 2026-02-21
 categories: ["Tools", "macOS"]
 tags: ["osxphotos", "Photos.app", "CLI", "Automation", "Python"]
+draft: false
 ---
 
 Interaction with the Apple Photos library is usually restricted to the official app's GUI. However, the [osxphotos](https://github.com/RhetTbull/osxphotos) project provides a powerful command-line interface (CLI) and Python API to interact with, query, and export data from your Photos library.
@@ -70,6 +71,21 @@ for (const photo of Photos.selection()) {
   console.log(photo.filename());
 }
 ```
+
+## Efficient Image Browsing with Phoenix Slides
+
+When you need to browse images directly on disk—whether they are exported files or the internal "Originals" folder of your library—the [Phoenix Slides](https://blyt.net/phxslides/) app is an invaluable tool for macOS power users.
+
+Unlike the Photos app, which requires importing and managing a database, **Phoenix Slides** is a fast, lightweight image browser that allows you to flip through folders and disks full of images instantly.
+
+### Why it complements `osxphotos`:
+- **Speed**: It uses pre-caching and EXIF thumbnails to provide a blazingly fast browsing experience, even with thousands of images.
+- **Direct Access**: Ideal for browsing the output of your `osxphotos export` commands without the overhead of another management app.
+- **Recursive Search**: It can automatically find and display images in subfolders, making it perfect for navigating complex directory structures created by export templates.
+- **Lossless Edits**: Supports lossless JPEG rotation and transformations directly from its interface.
+- **Metadata View**: Conveniently displays EXIF data and JPEG comments while you browse.
+
+Phoenix Slides is especially useful for quickly verifying exported backups or performing a "sanity check" on the physical file structure of your library without the lag often associated with official media browsers.
 ## Understanding the Database Structure
 For those who want to look under the hood, the Photos library uses a SQLite database that follows Apple's **Core Data** conventions. Further details can be found in the [osxphotos wiki](https://github.com/RhetTbull/osxphotos/wiki/Understanding-the-Photos-database).
 
