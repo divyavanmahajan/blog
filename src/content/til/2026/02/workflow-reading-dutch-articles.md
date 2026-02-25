@@ -4,9 +4,10 @@ description: "A multi-step workflow using Mistral Document AI and custom scripts
 pubDate: 2026-02-21
 categories: ["Workflows", "AI"]
 tags: ["Mistral-AI", "OCR", "Translation", "Productivity"]
+draft: false
 ---
 
-Digitizing physical articles for translation can be cumbersome. This workflow leverages Mistral AI's Document AI features to handle OCR and translation efficiently.
+Reading articles in a unfamiliar language is a pain. I'm documenting the working that worked for me to read a multi-page Dutch article. Digitizing physical articles for translation is cumbersome. This workflow leverages Mistral AI's Document AI features to handle OCR and translation efficiently.
 
 ## The Digitization Workflow
 
