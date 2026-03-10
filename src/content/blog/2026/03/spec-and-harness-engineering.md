@@ -8,7 +8,7 @@ tags: ["spec-engineering", "harness-engineering", "ai-agents", "software-develop
 heroImage: "/images/spec-and-harness-engineering-hero.png"
 linkedin: true
 linkedinMessage: "Beyond 'vibe coding': Discover how Spec-Driven Development and Harness Engineering are reshaping the way we build production software with AI agents."
-series: "ai-agents-007"
+series: "ai_agents-007"
 draft: false
 ---
 
